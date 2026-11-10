@@ -61,6 +61,16 @@ header > p { color: var(--muted); }
 [hidden] { display: none !important; }
 .ready { border-left: 4px solid var(--accent); display: grid; gap: 12px; }
 .ready-price { max-width: 320px; }
+.ready-docs { border-top: 1px solid var(--line); padding-top: 12px; }
+.ready-docs .doclist { grid-template-columns: 1fr 1fr; column-gap: 20px; }
+.ready .ready-docs .doclist li { display: block; }
+@media (max-width: 720px) { .ready-docs .doclist { grid-template-columns: 1fr; } }
+.rep-docs { columns: 2; column-gap: 24px; list-style: none; margin: 0; padding: 0; }
+.rep-docs li { break-inside: avoid; padding: 3px 0 3px 26px; position: relative; }
+.rep-docs li::before { content: ""; position: absolute; left: 0; top: 5px; width: 14px; height: 14px; border: 1.5px solid #9aa8a1; border-radius: 3px; }
+.rep-docs li.got::before { background: #0b6b49; border-color: #0b6b49; }
+.rep-docs li.got::after { content: ""; position: absolute; left: 5px; top: 7px; width: 4px; height: 8px; border: solid #fff; border-width: 0 2px 2px 0; transform: rotate(45deg); }
+@media (max-width: 640px) { .rep-docs { columns: 1; } }
 .ready-price small { color: var(--muted); font-size: 0.85rem; }
 .ready .verdict { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
 .ready ul, .doclist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
@@ -88,14 +98,6 @@ header > p { color: var(--muted); }
 .rep-sheet table td { padding: 5px 6px; }
 .rep-contact { display: flex; gap: 14px; align-items: center; background: #f6f8f7; border-radius: 10px; padding: 12px 16px; }
 .rep-contact .agent-photo { width: 56px; height: 56px; }
-.track { display: grid; gap: 14px; border-left: 4px solid #c6a85e; }
-.track ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
-.track li { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; }
-.track li .dot { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; background: var(--line); color: var(--muted); }
-.track li.done .dot { background: var(--accent); color: #fff; }
-.track li.now { border-color: var(--accent); background: var(--accent-soft); }
-.track li.now .dot { background: #c6a85e; color: #fff; }
-.track .now-box { background: var(--bg); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; }
 .field textarea { font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; min-height: 70px; }
 @media print {
   body.report-open .wrap, body.report-open .rep-bar { display: none !important; }
@@ -241,7 +243,6 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
 </head>
 <body>
 <div class="wrap">
-  <section class="panel track" id="trackView" hidden aria-live="polite"></section>
 
   <header>
     <span class="tag">Step-by-step guide · for Jamaicans at home and abroad</span>
@@ -449,19 +450,18 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
         <h3 style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent);">Your readiness</h3>
         <div class="field ready-price"><label for="rPrice" id="rPriceLbl">Price of the home you're aiming for (J$)</label><input id="rPrice" type="number" min="0" step="100000" placeholder="e.g. 20000000" inputmode="numeric"><small id="rPriceHint">Not sure yet? The affordability calculator below gives you a range.</small></div>
         <div id="readyBody" style="display:grid; gap:12px;"></div>
+        <div class="ready-docs">
+          <div class="plan-head" style="align-items:center;">
+            <h3 id="docs-h" style="font-size:1rem;">Your document checklist</h3>
+            <small id="docsCount" style="color:var(--muted); font-variant-numeric: tabular-nums;"></small>
+          </div>
+          <p class="note" style="margin:4px 0 10px;">Tick each one as you get it. Your ticks stay in this browser only, and nothing is uploaded.</p>
+          <ul class="doclist" id="docList"></ul>
+        </div>
       </div>
       <ol class="steps" id="steps"></ol>
     </section>
   </div>
-
-  <section class="panel" aria-labelledby="docs-h" style="display:grid; gap:12px;">
-    <div class="plan-head" style="align-items:center;">
-      <h2 id="docs-h">Your document checklist</h2>
-      <small id="docsCount" style="color:var(--muted); font-variant-numeric: tabular-nums;"></small>
-    </div>
-    <p class="note">Everything you'll be asked for on your path, in one place. Tick items as you get them. Your ticks stay in this browser only, and nothing is uploaded.</p>
-    <ul class="doclist" id="docList"></ul>
-  </section>
 
   <div class="tools" data-paths="nht">
     <section class="panel" aria-labelledby="calc-h">
@@ -1548,7 +1548,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       return '<li class="' + (on ? "got" : "") + '"><label for="doc-' + i + '"><input type="checkbox" id="doc-' + i + '" data-k="' + k + '"' + (on ? " checked" : "") + '><span>' + t + '</span></label></li>';
     }).join("");
     document.getElementById("docsCount").textContent = got + " of " + items.length + " ready";
-    nums.docs = { got: got, total: items.length, missing: items.filter(function (t) { return !docsDone[docKey(t)]; }) };
+    nums.docs = { got: got, total: items.length, items: items.map(function (t) { return [t, !!docsDone[docKey(t)]]; }), missing: items.filter(function (t) { return !docsDone[docKey(t)]; }) };
   }
   document.getElementById("docList").addEventListener("change", function (e) {
     var k = e.target.getAttribute("data-k"); if (!k) return;
@@ -1603,7 +1603,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       else if (state.path === "bank") verdict = state.trn === "yes" ? "Next: get pre-qualified so you know your budget, then start viewing with Odeen." : "Get your TRN, then get pre-qualified.";
       else verdict = state.trn === "yes" ? "Ready to start viewing. Have your proof of funds ready before you make an offer." : "Start viewing while you get your TRN. You'll need it, and your proof of funds, before you make an offer.";
     }
-    if (nums.docs) add(nums.docs.got === nums.docs.total ? "ok" : "todo", nums.docs.got + " of " + nums.docs.total + " documents ready (see your document checklist).");
+    if (nums.docs) add(nums.docs.got === nums.docs.total ? "ok" : "todo", nums.docs.got + " of " + nums.docs.total + " documents ready (checklist below).");
     nums.ready = { verdict: verdict, items: it };
     var lbl = { ok: "Ready", todo: "To do", stop: "Check", info: "Note" };
     var rl = document.getElementById("rPriceLbl"), rp = document.getElementById("rPrice");
@@ -1637,14 +1637,14 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     }
     var money = (selling || !state.price) ? "" : '<div><h3>Money you\'ll need</h3><table>' + nums.stages.map(function (s) { return "<tr><td>" + s[0] + "</td><td style=\"text-align:right; white-space:nowrap;\">J$" + fmt(s[1], 0) + "</td></tr>"; }).join("") + '<tr class="total"><td>Total estimated cash</td><td style="text-align:right; white-space:nowrap;">J$' + fmt(nums.upfront, 0) + home(nums.upfront, fx) + "</td></tr></table></div>";
     var next = lastSteps.filter(function (s) { return !done[s.id]; }).slice(0, 4);
-    var miss = (nums.docs && nums.docs.missing) || [];
+    var nextHtml = '<div><h3>Your next steps</h3>' + (next.length ? '<ol style="margin:0; padding-left:18px; display:grid; gap:4px;">' + next.map(function (s) { return "<li>" + s.title + "</li>"; }).join("") + "</ol>" : "<p>All roadmap steps ticked. Talk to Odeen about what's next.</p>") + "</div>";
     var lbl = { ok: "Ready", todo: "To do", stop: "Check", info: "Note" };
     var html = '<div class="rep-head"><img src="' + document.querySelector(".brand-logo").src + '" alt="Realty ONE Group Titans"><div class="who">Prepared ' + today + '<br>with Odeen Cunningham, Licensed Real Estate Salesman</div></div>' +
       '<h2>Your property plan</h2><table>' + rows.map(function (r) { return "<tr><td style=\"color:#55665e;\">" + r[0] + "</td><td><strong>" + r[1] + "</strong></td></tr>"; }).join("") + "</table>" +
       '<div class="rep-grid"><div><h3>Readiness</h3><p><strong>' + nums.ready.verdict + '</strong></p><ul style="margin:0; padding-left:18px; display:grid; gap:4px;">' + nums.ready.items.map(function (x) { return "<li>" + lbl[x[0]] + ": " + x[1] + "</li>"; }).join("") + "</ul></div>" +
-      (money || "<div><h3>Documents still needed</h3><ul style=\"margin:0; padding-left:18px; display:grid; gap:4px;\">" + miss.slice(0, 10).map(function (t) { return "<li>" + t + "</li>"; }).join("") + "</ul></div>") + "</div>" +
-      '<div class="rep-grid"><div><h3>Your next steps</h3><ol style="margin:0; padding-left:18px; display:grid; gap:4px;">' + next.map(function (s) { return "<li>" + s.title + "</li>"; }).join("") + "</ol></div>" +
-      (money ? "<div><h3>Documents still needed (" + miss.length + ")</h3><ul style=\"margin:0; padding-left:18px; display:grid; gap:4px;\">" + miss.slice(0, 8).map(function (t) { return "<li>" + t + "</li>"; }).join("") + (miss.length > 8 ? "<li>and " + (miss.length - 8) + " more</li>" : "") + "</ul></div>" : "<div></div>") + "</div>" +
+      (money || nextHtml) + "</div>" +
+      (money ? '<div class="rep-grid">' + nextHtml + "<div></div></div>" : "") +
+      '<div><h3>Document checklist (' + (nums.docs ? nums.docs.got + " of " + nums.docs.total : 0) + ' ready)</h3><ul class="rep-docs">' + ((nums.docs && nums.docs.items) || []).map(function (d) { return '<li class="' + (d[1] ? "got" : "") + '">' + d[0] + "</li>"; }).join("") + "</ul></div>" +
       '<div class="rep-contact"><div class="agent-photo" role="img" aria-label="Odeen Cunningham"></div><div><strong>Odeen Cunningham</strong> · Realty ONE Group Titans · Licence S-4385<br>876-305-5553 (WhatsApp) · ocunningham@realtyonegrouptitans.com · @realhousesofjamaica</div></div>' +
       '<p style="font-size:0.8rem; color:#55665e; margin:0;">Estimates only, based on the answers and figures entered in the guide. Not a loan approval, legal or tax advice. NHT, your lender and your attorney confirm actual amounts, eligibility and dates.</p>';
     document.getElementById("repSheet").innerHTML = html;
@@ -1660,53 +1660,6 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
   document.getElementById("repPrint").addEventListener("click", function () { try { window.print(); } catch (e) { toast("Printing isn't available here. Open the guide in your browser to print."); } });
   document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeReport(); });
 
-  var TSTAGES = {
-    cash: [["Offer accepted", "The seller has accepted your offer. The attorneys are preparing the Agreement for Sale.", "Seller's attorney"],
-      ["Agreement signed and deposit paid", "Your Agreement for Sale is signed and your deposit is with the attorneys.", "You and the attorneys"],
-      ["Stamping and title checks", "The agreement is being stamped and your attorney is checking the title, taxes and bills.", "The attorneys"],
-      ["Balance paid", "The balance of the price and your closing costs are with your attorney.", "You and your attorney"],
-      ["Registration at the National Land Agency", "The transfer is being registered and the new title is being issued in your name.", "Your attorney and the NLA"],
-      ["Completion and keys", "The purchase is complete. The title is in your name and the keys are handed over.", "Odeen and the attorneys"]],
-    bank: [["Offer accepted", "The seller has accepted your offer. The attorneys are preparing the Agreement for Sale.", "Seller's attorney"],
-      ["Agreement signed and deposit paid", "Your Agreement for Sale is signed and your deposit is with the attorneys.", "You and the attorneys"],
-      ["Mortgage application and valuation", "Your lender is reviewing your application and arranging the valuation.", "Your lender"],
-      ["Commitment letter issued", "Your lender has approved the mortgage and issued its commitment letter.", "Your lender"],
-      ["Stamping and title checks", "The agreement is being stamped and the attorneys are checking the title.", "The attorneys"],
-      ["Loan paid out and registration", "Your lender is paying out the loan, and the transfer and mortgage are being registered.", "Your lender and attorney"],
-      ["Completion and keys", "The purchase is complete. The title is in your name and the keys are handed over.", "Odeen and the attorneys"]],
-    nht: [["Offer accepted", "The seller has accepted your offer. The attorneys are preparing the Agreement for Sale.", "Seller's attorney"],
-      ["Agreement signed and deposit paid", "Your Agreement for Sale is signed and your deposit is with the attorneys.", "You and the attorneys"],
-      ["NHT and lender application", "Your partner lender is processing your NHT loan and any top-up, including the valuation.", "Your lender and NHT"],
-      ["Loan interview and commitment letter", "Your loan interview is done and the commitment letter has been issued.", "Your lender and NHT"],
-      ["Stamping and title checks", "The agreement is being stamped and the attorneys are checking the title.", "The attorneys"],
-      ["Loans paid out and registration", "The NHT loan and top-up are being paid out, and the transfer is being registered.", "Your lender and attorney"],
-      ["Completion and keys", "The purchase is complete. The title is in your name and the keys are handed over.", "Odeen and the attorneys"]],
-    sale: [["Listed and marketing", "Your property is listed, with photos and viewings underway.", "Odeen"],
-      ["Offer accepted", "You've accepted an offer. The attorneys are preparing the Agreement for Sale.", "Odeen and your attorney"],
-      ["Agreement signed and deposit received", "The Agreement for Sale is signed and the buyer's deposit is with the attorneys.", "The attorneys"],
-      ["Stamping and transfer tax", "The agreement is being stamped and the transfer tax is being paid.", "Your attorney"],
-      ["Buyer's financing and balance", "The buyer's loan or balance is being finalized.", "The buyer's lender and attorney"],
-      ["Registration", "The transfer to the buyer is being registered at the National Land Agency.", "The attorneys and the NLA"],
-      ["Completion and money sent", "The sale is complete and your attorney is sending your money.", "Your attorney"]]
-  };
-  function enc64(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))); }
-  function dec64(s) { return JSON.parse(decodeURIComponent(escape(atob(s)))); }
-  function esc(s) { return String(s || "").replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
-  function showTracker(t) {
-    var list = TSTAGES[t.t] || TSTAGES.cash, cur = Math.min(Math.max(0, t.s | 0), list.length - 1);
-    var kind = t.t === "sale" ? "sale" : "purchase";
-    var v = document.getElementById("trackView");
-    v.innerHTML = '<span class="tag">Your ' + kind + ' tracker · with Odeen Cunningham</span>' +
-      '<h2>Hi ' + esc(t.n || "there") + ", here's where your " + kind + " stands</h2>" +
-      (t.p ? '<p style="color:var(--muted);">Reference: ' + esc(t.p) + "</p>" : "") +
-      '<div class="progress"><small>Stage ' + (cur + 1) + " of " + list.length + '</small><div class="bar"><span style="width:' + ((cur + 1) / list.length * 100) + '%"></span></div></div>' +
-      '<div class="now-box"><strong>What\'s happening now: ' + list[cur][0] + "</strong><span>" + esc(t.note || list[cur][1]) + "</span><span style=\"color:var(--muted); font-size:0.9rem;\">Handled by: " + list[cur][2] + (t.x ? " · Next expected: " + esc(t.x) : "") + "</span></div>" +
-      "<ol>" + list.map(function (s, i) { var c = i < cur ? "done" : i === cur ? "now" : ""; return '<li class="' + c + '"><span class="dot">' + (i < cur ? "✓" : i + 1) + "</span><span>" + s[0] + '</span><span class="pill ' + (i < cur ? "ok" : i === cur ? "todo" : "") + '">' + (i < cur ? "Done" : i === cur ? "Now" : "Upcoming") + "</span></li>"; }).join("") + "</ol>" +
-      '<p class="note">Last updated ' + esc(t.u || "") + ". This is a progress summary Odeen sends you on WhatsApp from 876-305-5553, not an official record. Some stages can overlap or happen in a different order, and your attorney confirms dates and amounts. If you got this link from anyone else, check with Odeen before acting on it.</p>" +
-      '<div class="actions"><a class="btn wa" href="https://wa.me/18763055553?text=' + encodeURIComponent("Hi Odeen, a question about my " + kind + (t.p ? " (" + t.p + ")" : "") + ":") + '" target="_blank" rel="noopener">Message Odeen on WhatsApp</a><span class="btn" style="cursor:default;">876-305-5553</span></div>';
-    v.hidden = false;
-  }
-  try { var tq = new URLSearchParams(location.search).get("track"); if (tq) showTracker(dec64(tq)); } catch (e) {}
 
 
   function amort(P, annualPct, years) {
