@@ -110,7 +110,8 @@ header > p { color: var(--muted); }
 .rep-sheet h3 { font-size: 1rem; border-bottom: 2px solid #c6a85e; padding-bottom: 4px; }
 .rep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
 .rep-sheet, .rep-sheet > *, .rep-grid > div { min-width: 0; }
-.rep-sheet td { overflow-wrap: anywhere; white-space: normal !important; }
+.rep-sheet td { overflow-wrap: break-word; }
+.rep-sheet td.amt { white-space: nowrap; text-align: right; padding-left: 12px; }
 @media (max-width: 640px) { .rep-grid { grid-template-columns: 1fr; } .rep-sheet { padding: 18px; font-size: 0.92rem; } .rep-head .who { text-align: left; } .rep-head img { width: 170px; } .report { padding: 12px 8px; } .rep-contact { flex-wrap: wrap; } }
 .rep-sheet table td { padding: 5px 6px; }
 .rep-contact { display: flex; gap: 14px; align-items: center; background: #f6f8f7; border-radius: 10px; padding: 12px 16px; }
@@ -1381,7 +1382,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     var agr = document.getElementById("cAgr").checked ? price * 0.002 * 1.15 : 0;
     var sSign = depAmt + agr;
     var sDone = price * atty * 1.15 + price * 0.0025 + 2500 + (cash ? 0 : loanAmt * num("cFee") / 100) + (cash ? price - depAmt : 0);
-    nums.stages = [["Before you sign: valuation and survey", sBefore], ["On signing: deposit" + (cash ? " (" + fmt(cashDep, 0) + "%)" : "") + (agr ? " and agreement for sale" : ""), sSign], ["At completion: " + (cash ? "balance of the price (" + fmt(100 - cashDep, 0) + "%), " : "") + "attorney, registration, stamp duty" + (cash ? "" : ", lender fees"), sDone]];
+    nums.stages = [[cash ? "Before you sign: survey (and valuation, if you want one)" : "Before you sign: valuation and survey", sBefore], ["On signing: deposit" + (cash ? " (" + fmt(cashDep, 0) + "%)" : "") + (agr ? " and agreement for sale" : ""), sSign], ["At completion: " + (cash ? "balance of the price (" + fmt(100 - cashDep, 0) + "%), " : "") + "attorney, registration, stamp duty" + (cash ? "" : ", lender fees"), sDone]];
     nums.upfront = upfront; nums.price = price; nums.loanAmt = loanAmt;
     var fxS = fx;
     document.getElementById("stageRows").innerHTML = nums.stages.map(function (s) { return "<tr><td>" + s[0] + "</td><td>J$" + fmt(s[1], 0) + home(s[1], fxS) + "</td></tr>"; }).join("") +
@@ -1652,7 +1653,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       } else rows.push(["Price you're aiming for", "Not set yet"]);
       if (state.path === "nht" && !L.local) rows.push(["Estimated NHT eligibility review", document.getElementById("earliest").textContent + " (NHT confirms)"]);
     }
-    var money = (selling || !state.price) ? "" : '<div><h3>Money you\'ll need</h3><table>' + nums.stages.map(function (s) { return "<tr><td>" + s[0] + "</td><td style=\"text-align:right; white-space:nowrap;\">J$" + fmt(s[1], 0) + "</td></tr>"; }).join("") + '<tr class="total"><td>Total estimated cash</td><td style="text-align:right; white-space:nowrap;">J$' + fmt(nums.upfront, 0) + home(nums.upfront, fx) + "</td></tr></table></div>";
+    var money = (selling || !state.price) ? "" : '<div><h3>Money you\'ll need</h3><table>' + nums.stages.map(function (s) { return "<tr><td>" + s[0] + "</td><td class=\"amt\">J$" + fmt(s[1], 0) + "</td></tr>"; }).join("") + '<tr class="total"><td>Total estimated cash</td><td class="amt">J$' + fmt(nums.upfront, 0) + (home(nums.upfront, fx) ? "<br>" + home(nums.upfront, fx).replace(" · ", "") : "") + "</td></tr></table></div>";
     var next = lastSteps.filter(function (s) { return !done[s.id]; }).slice(0, 4);
     var nextHtml = '<div><h3>Your next steps</h3>' + (next.length ? '<ol style="margin:0; padding-left:18px; display:grid; gap:4px;">' + next.map(function (s) { return "<li>" + s.title + "</li>"; }).join("") + "</ol>" : "<p>All roadmap steps ticked. Talk to Odeen about what's next.</p>") + "</div>";
     var lbl = { ok: "Ready", todo: "To do", stop: "Check", info: "Note" };
