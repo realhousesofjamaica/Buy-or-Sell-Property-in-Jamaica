@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#ffffff">
 <title>Buy or Sell Property in Jamaica</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -10,33 +12,22 @@
 <style>
 /* Layout: situation questions (left, sticky) drive a numbered loan roadmap with a "who to contact" card per step (right); planners + directory below. */
 :root {
-  --bg: #f5f7f6;
+  --bg: #f6f8f7;
   --surface: #ffffff;
-  --ink: #14201b;
-  --muted: #5a6a63;
-  --line: #dce4e0;
-  --accent: #0e6b4c;
-  --accent-soft: #e2f0e9;
-  --gold: #a87814;
-  --gold-soft: #fbf1db;
+  --ink: #102019;
+  --muted: #55665e;
+  --line: #e1e8e4;
+  --accent: #0b6b49;
+  --accent-soft: #e6f3ec;
+  --gold: #9a6d0f;
+  --gold-soft: #fbf3df;
   --warn: #a2441c;
-  --warn-soft: #fbe8de;
+  --warn-soft: #fbe9df;
   --font-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
   --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
   color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --bg: #0f1513; --surface: #161f1c; --ink: #e6eeea; --muted: #9cb0a7; --line: #2a3632;
-    --accent: #4fc093; --accent-soft: #183528; --gold: #e2b350; --gold-soft: #32281a;
-    --warn: #f08a5d; --warn-soft: #3a2219; color-scheme: dark;
-  }
-}
-:root[data-theme="dark"] {
-  --bg: #0f1513; --surface: #161f1c; --ink: #e6eeea; --muted: #9cb0a7; --line: #2a3632;
-  --accent: #4fc093; --accent-soft: #183528; --gold: #e2b350; --gold-soft: #32281a;
-  --warn: #f08a5d; --warn-soft: #3a2219; color-scheme: dark;
-}
+html, :root[data-theme] { color-scheme: light; background: var(--bg); }
 
 * { box-sizing: border-box; }
 html, body { margin: 0; }
@@ -68,6 +59,49 @@ header > p { color: var(--muted); }
 .pcard .pc-cta { justify-self: start; font-weight: 700; font-size: 0.9rem; color: var(--accent); }
 .pcard[aria-pressed="true"] .pc-cta { background: var(--accent); color: var(--surface); padding: 3px 10px; border-radius: 999px; }
 [hidden] { display: none !important; }
+.ready { border-left: 4px solid var(--accent); display: grid; gap: 12px; }
+.ready-price { max-width: 320px; }
+.ready-price small { color: var(--muted); font-size: 0.85rem; }
+.ready .verdict { font-family: var(--font-display); font-size: 1.15rem; font-weight: 700; }
+.ready ul, .doclist { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+.ready li { display: grid; grid-template-columns: 74px 1fr; gap: 10px; align-items: start; font-size: 0.95rem; }
+.pill { display: inline-block; text-align: center; font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; }
+.pill.ok { background: var(--accent-soft); color: var(--accent); }
+.pill.todo { background: var(--gold-soft); color: var(--gold); }
+.pill.stop { background: var(--warn-soft); color: var(--warn); }
+.doclist li label { display: flex; gap: 10px; align-items: start; cursor: pointer; font-size: 0.95rem; }
+.doclist input { width: 18px; height: 18px; margin-top: 2px; accent-color: var(--accent); flex: none; }
+.doclist li.got span { color: var(--muted); text-decoration: line-through; }
+.brand-logo { width: 200px; max-width: 100%; height: auto; display: block; margin-top: 4px; }
+.report { position: fixed; inset: 0; background: rgba(16, 32, 25, 0.55); z-index: 50; overflow-y: auto; padding: 24px 12px; }
+.rep-bar { max-width: 820px; margin: 0 auto 12px; display: flex; flex-wrap: wrap; gap: 8px; justify-content: flex-end; }
+.rep-sheet { max-width: 820px; margin: 0 auto; background: #fff; color: #102019; border-radius: 12px; padding: 32px; display: grid; gap: 18px; border-top: 6px solid #c6a85e; }
+.rep-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px; border-bottom: 1px solid #e1e8e4; padding-bottom: 14px; }
+.rep-head img { width: 210px; height: auto; }
+.rep-head .who { text-align: right; font-size: 0.88rem; color: #55665e; }
+.rep-sheet h2 { font-size: 1.5rem; }
+.rep-sheet h3 { font-size: 1rem; border-bottom: 2px solid #c6a85e; padding-bottom: 4px; }
+.rep-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.rep-sheet, .rep-sheet > *, .rep-grid > div { min-width: 0; }
+.rep-sheet td { overflow-wrap: anywhere; white-space: normal !important; }
+@media (max-width: 640px) { .rep-grid { grid-template-columns: 1fr; } .rep-sheet { padding: 18px; font-size: 0.92rem; } .rep-head .who { text-align: left; } .rep-head img { width: 170px; } .report { padding: 12px 8px; } .rep-contact { flex-wrap: wrap; } }
+.rep-sheet table td { padding: 5px 6px; }
+.rep-contact { display: flex; gap: 14px; align-items: center; background: #f6f8f7; border-radius: 10px; padding: 12px 16px; }
+.rep-contact .agent-photo { width: 56px; height: 56px; }
+.track { display: grid; gap: 14px; border-left: 4px solid #c6a85e; }
+.track ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+.track li { display: grid; grid-template-columns: 28px 1fr auto; gap: 10px; align-items: center; padding: 10px 12px; border: 1px solid var(--line); border-radius: 10px; }
+.track li .dot { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font-size: 0.8rem; font-weight: 700; background: var(--line); color: var(--muted); }
+.track li.done .dot { background: var(--accent); color: #fff; }
+.track li.now { border-color: var(--accent); background: var(--accent-soft); }
+.track li.now .dot { background: #c6a85e; color: #fff; }
+.track .now-box { background: var(--bg); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; }
+.field textarea { font: inherit; padding: 8px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--bg); color: var(--ink); width: 100%; min-height: 70px; }
+@media print {
+  body.report-open .wrap, body.report-open .rep-bar { display: none !important; }
+  body.report-open .report { position: static; background: #fff; padding: 0; overflow: visible; }
+  body.report-open .rep-sheet { box-shadow: none; border-radius: 0; max-width: none; }
+}
 .faq { display: grid; gap: 8px; }
 .faq details { border: 1px solid var(--line); border-radius: 8px; padding: 10px 14px; background: var(--bg); }
 .faq summary { cursor: pointer; font-weight: 600; }
@@ -91,7 +125,7 @@ tr.total td { font-weight: 700; border-top: 2px solid var(--ink); }
 
 .main { display: grid; grid-template-columns: 330px 1fr; gap: 24px; align-items: start; }
 @media (max-width: 880px) { .main { grid-template-columns: 1fr; } }
-.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 22px; }
+.panel { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px; box-shadow: 0 1px 2px rgba(16, 32, 25, 0.04), 0 4px 16px rgba(16, 32, 25, 0.04); }
 .questions { display: grid; gap: 18px; position: sticky; top: 16px; max-height: calc(100vh - 32px); overflow-y: auto; }
 @media (max-width: 880px) { .questions { position: static; max-height: none; } }
 .q { display: grid; gap: 7px; }
@@ -116,7 +150,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .actions { display: flex; gap: 8px; flex-wrap: wrap; }
 .btn { font: inherit; font-size: 0.9rem; font-weight: 600; padding: 7px 14px; border-radius: 8px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
 .btn.primary { background: var(--accent); color: var(--surface); border-color: var(--accent); }
-.btn.wa { background: #1f9d55; border-color: #1f9d55; color: #ffffff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; }
+.btn.wa { background: #1f9d55; border-color: #1f9d55; color: #ffffff; text-decoration: none; display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; flex: none; }
 .btn.wa svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
 .wa-cta { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; background: var(--accent-soft); border-radius: 10px; padding: 12px 16px; }
 .wa-cta p { margin: 0; flex: 1 1 260px; font-size: 0.95rem; }
@@ -207,6 +241,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
 </head>
 <body>
 <div class="wrap">
+  <section class="panel track" id="trackView" hidden aria-live="polite"></section>
 
   <header>
     <span class="tag">Step-by-step guide · for Jamaicans at home and abroad</span>
@@ -226,7 +261,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
         <button type="button" data-v="other">Somewhere else</button>
       </div>
     </div>
-    <span class="qt" style="margin-top:6px;">Are you buying or selling?</span>
+    <span class="qt" style="margin-top:6px; font-weight:600; font-size:0.97rem;">Are you buying or selling?</span>
     <div class="path-cards" id="modeCards" style="grid-template-columns: repeat(2, 1fr);">
       <button type="button" class="pcard" data-mode="buy" aria-pressed="false">
         <span class="pc-tag">Buy</span>
@@ -249,9 +284,9 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       <button type="button" class="pcard" data-path="nht" aria-pressed="false">
         <span class="pc-tag">Lowest interest</span>
         <b>NHT loan</b>
-        <span class="pc-sub" id="nhtCardSub">Join NHT from abroad, pay in 3% of your income, then borrow at NHT's low rates. A partner bank can top it up.</span>
+        <span class="pc-sub" id="nhtCardSub">Join NHT from abroad, pay 3% of your earnings each month, then borrow at NHT's low rates. A partner bank can top it up.</span>
         <dl>
-          <dt>When you can apply</dt><dd id="nhtCardWhen">After 2 years of contributions (1 year if you paid NHT before)</dd>
+          <dt>When you can apply</dt><dd id="nhtCardWhen">After 104 weeks of contributions. Earlier weeks may shorten this once NHT verifies them</dd>
           <dt>Interest</dt><dd>0% to 5%, based on income</dd>
           <dt>Best if</dt><dd>You can plan 2 years ahead and want the lowest monthly payment</dd>
         </dl>
@@ -332,7 +367,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       <div class="q" data-paths="nht bank">
         <span class="qt" id="q-emp">How do you earn?</span>
         <div class="chips" role="group" aria-labelledby="q-emp" data-q="emp">
-          <button type="button" data-v="employed">Employed (W-2)</button>
+          <button type="button" data-v="employed" id="empBtn">Employed</button>
           <button type="button" data-v="self">Self-employed</button>
         </div>
       </div>
@@ -402,6 +437,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
           <div class="bar"><span id="progBar"></span></div>
           <div class="actions">
             <a class="btn wa wa-link" href="https://wa.me/18763055553" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.7-.4z"/></svg>Send my plan to Odeen</a>
+            <button class="btn primary" type="button" id="reportBtn">View my plan report</button>
             <button class="btn" type="button" id="copyBtn">Copy my checklist</button>
             <button class="btn" type="button" id="shareBtn">Copy link to my plan</button>
             <button class="btn" type="button" id="printBtn">Print or save as PDF</button>
@@ -409,9 +445,23 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
           </div>
         </div>
       </div>
+      <div class="panel ready" id="readyBox">
+        <h3 style="font-size:0.85rem; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent);">Your readiness</h3>
+        <div class="field ready-price"><label for="rPrice" id="rPriceLbl">Price of the home you're aiming for (J$)</label><input id="rPrice" type="number" min="0" step="100000" placeholder="e.g. 20000000" inputmode="numeric"><small id="rPriceHint">Not sure yet? The affordability calculator below gives you a range.</small></div>
+        <div id="readyBody" style="display:grid; gap:12px;"></div>
+      </div>
       <ol class="steps" id="steps"></ol>
     </section>
   </div>
+
+  <section class="panel" aria-labelledby="docs-h" style="display:grid; gap:12px;">
+    <div class="plan-head" style="align-items:center;">
+      <h2 id="docs-h">Your document checklist</h2>
+      <small id="docsCount" style="color:var(--muted); font-variant-numeric: tabular-nums;"></small>
+    </div>
+    <p class="note">Everything you'll be asked for on your path, in one place. Tick items as you get them. Your ticks stay in this browser only, and nothing is uploaded.</p>
+    <ul class="doclist" id="docList"></ul>
+  </section>
 
   <div class="tools" data-paths="nht">
     <section class="panel" aria-labelledby="calc-h">
@@ -486,28 +536,34 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     </section>
 
     <section class="panel" aria-labelledby="tl-h" style="grid-column: 1 / -1;" data-abroad="1">
-      <h2 id="tl-h">When can you apply?</h2>
+      <h2 id="tl-h">When could you be eligible?</h2>
       <div class="row3">
         <div class="field">
           <label for="regMonth">Month NHT registers you</label>
-          <input id="regMonth" type="month" value="2026-12">
+          <input id="regMonth" type="month" value="">
         </div>
         <div class="field">
           <label for="startMonth">Contributions start from (can be backdated)</label>
-          <input id="startMonth" type="month" value="2026-12">
+          <input id="startMonth" type="month" value="">
         </div>
         <div class="field">
           <label for="paidThrough">Paid up to (optional)</label>
           <input id="paidThrough" type="month" value="">
         </div>
       </div>
+      <div class="row3" id="priorRow">
+        <div class="field">
+          <label for="priorWeeks">Earlier weeks on your NHT record (only weeks NHT has recorded)</label>
+          <input id="priorWeeks" type="number" min="0" step="1" value="0">
+        </div>
+      </div>
       <div class="figs" style="grid-template-columns: repeat(3, 1fr);">
         <div class="fig"><small>Backdated months</small><b id="backMonths">–</b></div>
         <div class="fig"><small>Lump sum for backdated months</small><b id="backSum">–</b></div>
-        <div class="fig"><small>Earliest loan application</small><b id="earliest">–</b></div>
+        <div class="fig"><small>Estimated review date (if NHT verifies your record)</small><b id="earliest">–</b></div>
       </div>
       <div class="timeline" id="timeline"></div>
-      <p class="note">NHT's published rules say the first payment is due when you register, and a new contributor's waiting time is 2 years from registration (1 year for a previous contributor, who may pay that year as a lump sum but still has to wait it out). So a backdated start can bring forward the date you reach 104 weeks, but you still can't apply before the waiting time from registration ends. Get NHT to confirm in writing that they'll accept a backdated start date for you.</p>
+      <p class="note">An estimate, not a confirmed date. Overseas voluntary contributors generally need at least 104 weeks of contributions, including 52 weeks paid in the period immediately before applying. Earlier contributions may count toward the 104, but NHT must verify your record. Your first payment is due when you register, so this estimate counts from your registration month and does not count backdated months toward eligibility. If you want to backdate, get NHT's answer in writing.</p>
     </section>
   </div>
 
@@ -529,7 +585,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       <div class="fig"><small>Loan you could get</small><b id="aLoan">–</b></div>
       <div class="fig"><small>Price range to look at</small><b id="aPrice">–</b></div>
     </div>
-    <p class="note">A guide, not an approval. Each lender sets its own limit (ask what share of income they allow) and checks your credit and documents. On the NHT path, your NHT loan at its lower rate can raise this range. Use the planners below to see how.</p>
+    <p class="note">An estimate of borrowing capacity, not a lender's decision. Each lender sets its own limit (ask what share of income they allow) and assesses your credit history, debts, documents, the property's valuation and insurance before approving a loan. On the NHT path, your NHT loan at its lower rate can raise this range. Use the planners below to see how.</p>
   </section>
 
   <section class="panel" aria-labelledby="cost-h" style="display:grid; gap:14px;" data-paths="nht bank cash">
@@ -538,18 +594,24 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     <div class="row3">
       <div class="field"><label for="cPrice">Property price (J$)</label><input id="cPrice" type="number" min="0" step="100000" value="20000000"></div>
       <div class="field" id="cDepField"><label for="cDep">Deposit (% of price)</label><input id="cDep" type="number" min="0" max="100" step="1" value="10"></div>
+      <div class="field" id="cCashDepField" hidden><label for="cCashDep">Deposit paid on signing (% of price, set by your agreement)</label><input id="cCashDep" type="number" min="0" max="100" step="1" value="10"></div>
       <div class="field"><label for="cAtty">Your attorney's fee (%)</label><input id="cAtty" type="number" min="0" max="10" step="0.25" value="2.5"></div>
     </div>
     <div class="row3">
       <div class="field"><label for="cVal">Valuation and survey (J$)</label><input id="cVal" type="number" min="0" step="10000" value="100000"></div>
-      <div class="field" data-abroad="1"><label for="cRate" class="fxLbl">US$1 = J$ (use today's rate)</label><input id="cRate" type="number" min="1" step="0.5" value="158"></div>
+      <div class="field" data-abroad="1"><label for="cRate" class="fxLbl">US$1 = J$ (use today's rate from boj.org.jm)</label><input id="cRate" type="number" min="1" step="0.5" value="158"></div>
       <div class="field" id="cFeeField"><label for="cFee">Lender's fees (% of loan, estimate)</label><input id="cFee" type="number" min="0" max="5" step="0.25" value="1"></div>
     </div>
+    <label style="display:flex; gap:8px; align-items:center; font-size:0.95rem;"><input type="checkbox" id="cAgr" style="width:18px;height:18px;accent-color:var(--accent);"> Add a separate fee for the Agreement for Sale (only if your attorney's quote doesn't include it)</label>
     <div class="scroll">
       <table class="cost-table"><tbody id="costRows"></tbody></table>
     </div>
+    <h3>When each cost is usually due</h3>
+    <div class="scroll">
+      <table class="cost-table"><tbody id="stageRows"></tbody></table>
+    </div>
     <div class="wa-cta"><p><strong>Want help with these numbers?</strong> Send your plan to Odeen on WhatsApp. Your choices and price go with it, so he can reply with real options.</p><a class="btn wa wa-link" href="https://wa.me/18763055553" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.7-.4z"/></svg>Send my plan to Odeen</a></div>
-    <p class="note">Registration (0.5%) and stamp duty (J$5,000) are usually split equally between buyer and seller, and 15% GCT is added to attorney's fees. The agreement for sale share and lender fees are estimates. Check the split in your sale agreement.</p>
+    <p class="note">Registration (0.5%) and stamp duty (J$5,000) are usually split equally between buyer and seller, and 15% GCT is added to attorney's fees. The agreement for sale and lender fees are estimates. These costs fall at different stages: the deposit when you sign, most of the rest at completion.</p>
   </section>
 
   <section class="panel" aria-labelledby="sell-h" style="display:grid; gap:14px;" data-paths="sell">
@@ -562,37 +624,24 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     </div>
     <div class="row3">
       <div class="field"><label for="sMort">Mortgage to pay off (J$)</label><input id="sMort" type="number" min="0" step="100000" value="0"></div>
+      <div class="field"><label for="sDisch">Mortgage discharge fees (J$, ask your lender; used only if you have a mortgage)</label><input id="sDisch" type="number" min="0" step="5000" value="50000"></div>
+      <div class="field"><label for="sMV">Market value for transfer tax (J$, if your attorney says it's higher than the price)</label><input id="sMV" type="number" min="0" step="100000" value="" placeholder="Leave blank to use the sale price"></div>
       <div class="field"><label for="sOther">Other costs: survey, unpaid bills (J$)</label><input id="sOther" type="number" min="0" step="10000" value="60000"></div>
-      <div class="field" data-abroad="1"><label for="sRate" class="fxLbl">US$1 = J$ (use today's rate)</label><input id="sRate" type="number" min="1" step="0.5" value="158"></div>
+      <div class="field" data-abroad="1"><label for="sRate" class="fxLbl">US$1 = J$ (use today's rate from boj.org.jm)</label><input id="sRate" type="number" min="1" step="0.5" value="158"></div>
     </div>
-    <label style="display:flex; gap:8px; align-items:center; font-size:0.95rem;"><input type="checkbox" id="sHalf" style="width:18px;height:18px;accent-color:var(--accent);"> The property is in Trelawny, Hanover, Westmoreland or St. Elizabeth (transfer tax cut by half)</label>
+    <label style="display:flex; gap:8px; align-items:center; font-size:0.95rem;"><input type="checkbox" id="sAgr" style="width:18px;height:18px;accent-color:var(--accent);"> Add a separate fee for the Agreement for Sale (only if your attorney's quote doesn't include it)</label>
+    <label style="display:flex; gap:8px; align-items:center; font-size:0.95rem;"><input type="checkbox" id="sHalf" style="width:18px;height:18px;accent-color:var(--accent);"> Apply the announced 50% transfer tax cut for Trelawny, Hanover, Westmoreland or St. Elizabeth (only after your attorney confirms it applies to your sale)</label>
     <div class="scroll">
       <table class="cost-table"><tbody id="sellRows"></tbody></table>
     </div>
     <div class="wa-cta"><p><strong>Want a price opinion?</strong> Send your details to Odeen on WhatsApp and he'll tell you what your property could sell for.</p><a class="btn wa wa-link" href="https://wa.me/18763055553" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.7-.4z"/></svg>Send my details to Odeen</a></div>
-    <p class="note">Transfer tax is 2% of the price and is paid by the seller. In March 2026 the Government cut it by half for two years in the four parishes hit hardest by Hurricane Melissa, so check with your attorney whether your sale qualifies. Registration (0.5%) and stamp duty (J$5,000) are usually split with the buyer. GCT of 15% is added to commission and attorney's fees. Jamaica has no capital gains tax, but if you live abroad your home country may tax the gain.</p>
+    <p class="note">Transfer tax is 2%, paid by the seller. It's charged on the sale price, or on the market value if the Stamp Office assesses it higher. In March 2026 the Government announced a 50% cut for two years in the four parishes hit hardest by Hurricane Melissa. Your attorney can confirm whether it's in effect and whether your sale qualifies. Registration (0.5%) and stamp duty (J$5,000) are usually split with the buyer. GCT of 15% is added to commission and attorney's fees. Jamaica has no capital gains tax, but if you live abroad your home country may tax the gain.</p>
   </section>
 
   <section class="panel" aria-labelledby="search-h" style="display:grid; gap:14px;">
-    <h2 id="search-h">Search Realty ONE Group Titans listings</h2>
-    <p class="note" id="searchIntro">Browse homes, apartments and land for sale across Jamaica. Results open on the Realty ONE Group Titans website. Found one you like? Send the link to Odeen and he'll arrange a viewing, in person or by video.</p>
-    <div class="row3">
-      <div class="field"><label for="srCat">Type</label>
-        <select id="srCat"><option value="residential">Residential</option><option value="commercial">Commercial</option></select></div>
-      <div class="field"><label for="srParish">Parish</label>
-        <select id="srParish">
-          <option value="">All parishes</option>
-          <option>Clarendon</option><option>Hanover</option><option>Kingston &amp; St. Andrew</option><option>Manchester</option>
-          <option>Portland</option><option>St. Ann</option><option>St. Catherine</option><option>St. Elizabeth</option>
-          <option selected>St. James</option><option>St. Mary</option><option>St. Thomas</option><option>Trelawny</option><option>Westmoreland</option>
-        </select></div>
-      <div class="field" style="align-content:end;"><a class="btn primary" id="srGo" href="https://www.realtyonegrouptitans.com/property-search" target="_blank" rel="noopener" style="text-align:center; text-decoration:none;">Search listings</a></div>
-    </div>
-    <div class="actions">
-      <a class="btn" href="https://www.realtyonegrouptitans.com/property-search" target="_blank" rel="noopener" style="text-decoration:none;">All properties</a>
-      <a class="btn" href="https://www.realtyonegrouptitans.com/recent-properties" target="_blank" rel="noopener" style="text-decoration:none;">Newest listings</a>
-      <a class="btn" href="https://www.realtyonegrouptitans.com/development" target="_blank" rel="noopener" style="text-decoration:none;">New developments</a>
-    </div>
+    <h2 id="search-h">See listings at Realty ONE Group Titans</h2>
+    <p class="note" id="searchIntro">Browse homes, apartments and land for sale across Jamaica on the Realty ONE Group Titans website. Found one you like? Send the link to Odeen and he'll arrange a viewing, in person or by video.</p>
+    <div class="actions"><a class="btn primary" href="https://www.realtyonegrouptitans.com/" target="_blank" rel="noopener" style="text-decoration:none;">Browse listings</a></div>
   </section>
 
   <section class="agent" id="agent" aria-labelledby="agent-h">
@@ -610,6 +659,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
         <span>Instagram: <a href="https://www.instagram.com/realhousesofjamaica/">@realhousesofjamaica</a></span>
       </div>
       <div class="actions"><a class="btn wa wa-link" href="https://wa.me/18763055553" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm0 18.2c-1.5 0-3-.4-4.3-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2c0 1.3.9 2.5 1.1 2.7.1.2 1.8 2.8 4.4 3.9 1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.1-1.2l-.7-.4z"/></svg>Message Odeen on WhatsApp</a></div>
+      <img class="brand-logo" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAQDAwMDAgQDAwMEBAQFBgoGBgUFBgwICQcKDgwPDg4MDQ0PERYTDxAVEQ0NExoTFRcYGRkZDxIbHRsYHRYYGRj/2wBDAQQEBAYFBgsGBgsYEA0QGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBgYGBj/wAARCADLAoADASIAAhEBAxEB/8QAHAABAAMAAwEBAAAAAAAAAAAAAAYHCAMEBQEC/8QAXxAAAQMDAgMEBAUNCwcHDQAAAQACAwQFBgcREiExCBNBUSJhcYEUMpGxshUjNTZCYnJzdHWhwdEWFzQ3OENSVZKUtAkYJIKTs9MlMzlYg6PwREVGU1RWY8PS1OHi8f/EABsBAQADAQEBAQAAAAAAAAAAAAADBAUBBgIH/8QANxEAAgIBAQUECAQHAQEAAAAAAAECAwQRBRIhMUETUWFxBhQiMoGRscEjodHhFSQzQlLw8XKy/9oADAMBAAIRAxEAPwDfyIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiLqXG5UNpt76241LKeBnV7z+geZ9QXJSUVq3wOpN8EdvdeZdsgs1ji47pcIaffmGOdu93saOZVWZLqncK1z6WwNdRU/T4Q4fXX+zwb8/sVfSzSzzumnlfLI47ue9xc4+0ledzPSGuD3aFvPv6fuaFOz5S42PQt246v22IllrtlRVHwfM4RN+TmVHKrVrJJnH4PT0FMPVGXn5SVAkWFbtnLs/v08uBfjh0x6EvOp2Yk7i4QD1CnZ+xcsWqWXRuBfPSTDyfTgfMQoWirraOUuPaP5knq1X+KLNodYqxrgLjZoZG+LqeQsPyHf51L7RqPi90c2J1Y6imdy4KscAJ9Tun6VQaK7Rt3KrftPeXiQWYFUuS0NUMex7A9jg5pG4IO4K/SzhYctvmOyj6n1jjDv6VNL6UZ93h7RsrhxXPrVkfDTP/0O4bfweR3J/wCA7x9nVekwds05TUH7Mu5/Zmbfhzq480S5ERa5UCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiIgCIiAIiIAiLqXK40lptU9xrZBHBC0uc79Q8yegXJSUVq+R1LXgjp5FkNvxuzurq9+/3McTfjSu8h+3wVCZFktzyW5Gqr5NmNJ7qBp9CIerzPrTJcirMlvj6+qJawejDDvuImeXt8yvHXhdq7VllS3IcIL8/M3cXFVS3pe8ERFjFwIiIAiIgCIiAL61zmPD2OLXNO4IOxB8wviIC3MD1FdVSRWW/wAw792zYKt3LvD4Nf8AfeR8farOB3Cyqrp03zN13pPqLcpeKugZvHI485mDz++Hj5jn5r12xtrObWPc+PR/YyM3EUfxIcupYKIi9MZgREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQA8gqZ1TyU1t3FgpZP8AR6U8U+x+PLt0/wBUfpPqVp5BdmWTGq26P2PcRlzQfundGj5SFmuaWWeoknmeXyyOL3uPUuJ3J+Vec9IcxwrVEecufl+5o7Pp3pOx9D8IiLxxshERAEREAREQBERAEREAXYoa2pttygr6OQxzwvD2O9Y/V4Lrouxk4vVcw1rwZpewXmnv2PUt0p9gJW+kz+g4cnN9xXpqodIr0YrlVWKV/oTN7+EHwcOTh7xsfcreX6Ls7K9ZojZ16+Z5zIq7KxxCIivEAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREBWur9xMNiobWx3OolMrwP6LBy/SR8ip9T7VupMuawU+/KClb8rnE/qCgK/P9s2uzLn4cPkegw47tKABJAA3J8ApxY9L77dIWVFc9lthcNwJWl0hH4Ph7z7l7OleLQzMdkldEH8Lyyla4bg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pmohfqed+qeLzsglfFG2o45GsJazdnLc+Cp5q1rWnfH/AOkTUe8/J/Ql46LrXH7E1X4l/wBErs+C61wBda6lrQSTE8ADx9Eq1P3WRLmR3TX+K20/gP8ApuUrUX07hmp9NLXDUQyQyNY7iZI0tcPTd1BUoVfCWmPWn3L6El39SXmyFXP+O6w/kFQpqofcqed2stjqGwSOhZRTtdIGEtaT0BPQKYLmKvat/wDX2QtfCPl92R7N7wbJhFdVxnad7O5h268buQ+Tmfcopa8ixGkwCLG5jXlhpjFMRQyndzh6R6eZK9m/09RetR7LazTymgoQa+eQsPA545Mbv0J8dvWpkOiruuy+6cotJL2eK18X1Xl8CRSjCCTXF8efyIdppdTcMKjo5Xl09A80zuIEEtHNhIPTl8ylNx+xNV+Jf9EqKsp6izawPmigldQ3in+uOYwlrJmdCSOm4+dSq4AutdS1oJJieAB4+iVLibypdcucdV8uT+Wh8XaOe8uT4kMxCz0d90SobZWs3ilieNx1YeN2zh6wu1iF4rIpKnE76/8A5ToG+hIf/KYfuXjz8N//AOrtadwTU+mlrhqIZIZGscHMkaWuHpu6gr5mFhqa2Knvdn9G8W495AR/Ot+6jPqI32//ACq1dcoUV3QXFRWq71p9V0+XUklJOcoS5Nv4M62l/wDFzTfjpvplSquoqW42+WirYGzU8reF8bhyIUZ01hnp8Ap46inlgf30p7uRpaQC8kcjzXs5BV3mitPwmyW+Ovna8F8Dn8Jcz7rh++/8c1YxGo4kN5cN1dPDuPi3jc9O8jZxzJ8ZYX4pdfhtGzmLZcPS2Hkx/h7F7+M5FDkdnNXHA+nmieYZ6eT40Tx1C8L98iiEfdusN8Fdtt8F+Cnfi8uLp713MHtVwoqGvuN1iEFZc6p1U+AHfugejT61DjzgrVHHlrHjqui7vLyPuxPcbsXHp4krREWqVQiIgCIiAIiIAiIgCIiA6NztFuvNGaW50cVTEegeObfWD1B9ire96QnidNYK/Ydfg9V4ex4/WPerWRU8rAoyV+LHj39Saq+dXuszhcsQyS1E/DLPUhg/nI29435W7rxHAscWvHCR4O5Fap2XXnt1DVfwqippvxkTXfOFh2+jcX/Tnp5ovQ2k/wC6Jl7cea+bgdSFpR2LY2527rFbiev8Hb+xc0NgsdOd4LPQRnzbTtB+ZQL0as62L5H3/Eo/4mb6S3XCvkDKGhqalx8Ioy75lLbTpdklwc19Y2K3QnqZjxP9zR+shXkyNrG8LGta3yaNgv10Cu0ejlMXrbJy/IhntGb91aESx/T2wWFzJ+5NbVt59/UAHhP3reg+f1qWAL6i3KaK6Y7tcdEUZzlN6yeoREUx8BERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREAREQBERAEREB//Z" alt="Realty ONE Group Titans">
     </div>
   </section>
 
@@ -648,6 +698,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
         <div class="fig"><small id="topPmtLbl">Top-up per month</small><b id="topPmt">–</b></div>
       </div>
       <div class="fig"><small>Total monthly payment (both loans)</small><b id="totPmt">–</b></div>
+      <h3 style="font-size:0.98rem;">If rates change</h3>
+      <div class="scroll"><table><thead><tr><th id="scenHead">Mortgage rate</th><th>Monthly payment</th><th>Change</th></tr></thead><tbody id="rateScen"></tbody></table></div>
       <p class="note" data-paths="nht">The NHT portion fills automatically from the loan planner (limit, applicants, rate and term). Change it if your eligibility letter shows a different amount. The 9% top-up rate is only a placeholder: replace it with the rate each lender quotes you. Lenders often ask overseas borrowers for a bigger deposit, so ask how much they finance for non-residents.</p>
     </section>
 
@@ -724,10 +776,10 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     <h2 id="faq-h">Questions and terms explained</h2>
     <div class="faq">
       <details><summary>Can anyone buy property in Jamaica?</summary><p>Yes. There are no nationality restrictions on buying residential property, so Jamaicans abroad, their children and foreign buyers can all own property. You'll need a TRN.</p></details>
-      <details><summary>Do I need to be in Jamaica to buy or sell?</summary><p>No. Your attorney handles the legal work, and a Power of Attorney lets someone you trust sign for you. Many lenders also take documents online or at their overseas offices.</p></details>
-      <details><summary>How long does it take?</summary><p>Cash purchases often complete in about 2 to 4 months. With a mortgage, allow about 4 to 6 months. Estate sales and missing documents take longer.</p></details>
-      <details><summary>Can I use the NHT if I live abroad?</summary><p>Yes. Register as an Overseas Voluntary Contributor and pay 3% of your income. After 104 weeks of contributions, with the last 52 paid on time, you can apply for a loan.</p></details>
-      <details><summary>Do I pay tax when I sell?</summary><p>Jamaica has no capital gains tax. The seller pays a 2% transfer tax, which is halved for two years from 2026 in Trelawny, Hanover, Westmoreland and St. Elizabeth. If you live abroad, your home country may tax the gain.</p></details>
+      <details><summary>Do I need to be in Jamaica to buy or sell?</summary><p>Often not. Your attorney handles the legal work, and a Power of Attorney can let someone you trust sign for you. Many lenders take documents online or at their overseas offices. Whether you can do everything remotely depends on your lender, your attorney and the documents involved.</p></details>
+      <details><summary>How long does it take?</summary><p>Cash purchases often complete in about 2 to 4 months. With a mortgage, allow about 4 to 6 months. Estate sales and missing documents take longer. These are planning estimates, not guarantees.</p></details>
+      <details><summary>Can I use the NHT if I live abroad?</summary><p>Yes. Register as an Overseas Voluntary Contributor and pay 3% of your earnings (gross pay if employed, income after business expenses if self-employed). Once NHT verifies 104 weeks of contributions, including the 52 weeks right before you apply, you can apply for a loan.</p></details>
+      <details><summary>Do I pay tax when I sell?</summary><p>Jamaica has no capital gains tax. The seller pays a 2% transfer tax. A 50% cut for two years was announced in March 2026 for Trelawny, Hanover, Westmoreland and St. Elizabeth, so ask your attorney whether it applies. If you live abroad, your home country may tax the gain.</p></details>
     </div>
     <h3>Terms you'll hear</h3>
     <dl class="gloss">
@@ -755,8 +807,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       <div><strong>NHT Montego Bay (St. James)</strong><span>42b Union Street, Montego Bay</span><span>876-952-0063 · 876-979-3418-9</span></div>
       <div><strong>NHT loan documents</strong><span>loanprocessing@nht.gov.jm</span><span>Upload via NHT Online: online.nht.gov.jm</span></div>
       <div id="dirTaj"></div>
-      <div><strong>NIS: Ministry of Labour &amp; Social Security</strong><span>14 National Heroes Circle, Kingston 4</span><span>876-922-8000-13</span><span>clientcare@mlss.gov.jm</span></div>
-      <div><strong>Registrar General's Dept (birth certificate, Island Record Office)</strong><span>Twickenham Park, Spanish Town, St. Catherine</span><span>876-749-0550 · 876-619-1260</span><span>information@rgd.gov.jm · rgd.gov.jm</span></div>
+      <div><strong>NIS: Ministry of Labour &amp; Social Security</strong><span>Offices across Jamaica: find your nearest at mlss.gov.jm</span><span>876-922-8000-13</span><span>clientcare@mlss.gov.jm</span></div>
+      <div><strong>Registrar General's Dept (birth certificate, Island Record Office)</strong><span>Offices across Jamaica: find your nearest at rgd.gov.jm</span><span>876-749-0550</span><span>information@rgd.gov.jm · rgd.gov.jm</span></div>
       <div id="dirMission" data-abroad="1"></div>
       <div><strong>Real Estate Board (check an agent's licence)</strong><span>reb.gov.jm · member search</span><span>876-926-9748</span></div>
     </div>
@@ -777,25 +829,34 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     </div>
   </footer>
 </div>
+<div class="report" id="report" hidden role="dialog" aria-modal="true" aria-label="Your plan report">
+  <div class="rep-bar">
+    <button class="btn primary" type="button" id="repPrint">Print or save as PDF</button>
+    <a class="btn wa" id="repSend" href="https://wa.me/18763055553" target="_blank" rel="noopener">Send to Odeen on WhatsApp</a>
+    <button class="btn" type="button" id="repClose">Close</button>
+  </div>
+  <div class="rep-sheet" id="repSheet"></div>
+</div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
 (function () {
-  var state = { country: "us", mode: "buy", sgoal: "house", owners: "me", mort: "no", occ: "empty", path: "nht", prior: "no", trn: "no", nis: "no", status: "greencard", emp: "employed", goal: "buy", travel: "no" };
+  var state = { price: 0, sprice: 0, country: "us", mode: "buy", sgoal: "house", owners: "me", mort: "no", occ: "empty", path: "nht", prior: "no", trn: "no", nis: "no", status: "greencard", emp: "employed", goal: "buy", travel: "no" };
   var done = {};
+  var docsDone = {};
   var STORE = "jamaica-property-guide-v6";
   try {
     var saved = JSON.parse(localStorage.getItem(STORE) || "null");
-    if (saved) { Object.assign(state, saved.state || {}); done = saved.done || {}; }
+    if (saved) { Object.assign(state, saved.state || {}); done = saved.done || {}; docsDone = saved.docsDone || {}; }
   } catch (e) {}
   try {
     var qp = new URLSearchParams(location.search).get("plan");
     if (qp) { Object.assign(state, JSON.parse(decodeURIComponent(escape(atob(qp))))); }
   } catch (e) {}
-  function save() { try { localStorage.setItem(STORE, JSON.stringify({ state: state, done: done })); } catch (e) {} }
+  function save() { try { localStorage.setItem(STORE, JSON.stringify({ state: state, done: done, docsDone: docsDone })); } catch (e) {} }
 
   var LOC = {
-    us: { local: false, from: "the US", fromw: "from the US", inn: "in the US", adj: "US", cur: "US$", code: "USD", rate: 159,
+    us: { empLbl: "Employed (W-2)", local: false, from: "the US", fromw: "from the US", inn: "in the US", adj: "US", cur: "US$", code: "USD", rate: 159,
       status: { citizen: "US citizen", greencard: "Green card", permit: "Work visa / permit" },
       res: { citizen: "your US passport", greencard: "your valid Permanent Resident Card (green card)", permit: "your valid US work permit or visa", none: "a valid green card, non-Jamaican passport or work permit" },
       idNum: "Social Security number", notary: "a US notary", notaryExtra: " Attach the county or state clerk's certification of the notary.",
@@ -811,7 +872,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       jn: ["From the USA: 1-800-462-9003", "US representative office in Tamarac, Florida · jnbank.com"],
       vm: ["From the USA/Canada: 1-866-967-8627", "US offices: Brooklyn NY and Miramar FL · myvmgroup.com"],
       ncb: ["USA & Canada: 1-866-622-3477 · jncb.com"], scotia: ["USA & Canada toll-free: 1-866-767-2010", "customercare-jam@scotiabank.com"] },
-    uk: { local: false, from: "the UK", fromw: "from the UK", inn: "in the UK", adj: "UK", cur: "£", code: "GBP", rate: 212,
+    uk: { empLbl: "Employed (PAYE)", local: false, from: "the UK", fromw: "from the UK", inn: "in the UK", adj: "UK", cur: "£", code: "GBP", rate: 212,
       status: { citizen: "British citizen", greencard: "Settled (ILR)", permit: "Work visa" },
       res: { citizen: "your British passport", greencard: "proof of your settled status or indefinite leave to remain", permit: "your valid UK visa or residence permit", none: "a valid non-Jamaican passport, residence permit or work visa" },
       idNum: "National Insurance number", notary: "a UK notary public", notaryExtra: "",
@@ -827,7 +888,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       jn: ["From the UK: 0800 328 0387", "410 Brixton Road, London SW9 7AW · 311A Soho Road, Birmingham B21 9SD"],
       vm: ["From the UK: 0800 068 8627", "myvmgroup.com"],
       ncb: ["jncb.com"], scotia: ["customercare-jam@scotiabank.com"] },
-    ca: { local: false, from: "Canada", fromw: "from Canada", inn: "in Canada", adj: "Canadian", cur: "C$", code: "CAD", rate: 114,
+    ca: { empLbl: "Employed (T4)", local: false, from: "Canada", fromw: "from Canada", inn: "in Canada", adj: "Canadian", cur: "C$", code: "CAD", rate: 114,
       status: { citizen: "Canadian citizen", greencard: "Permanent resident", permit: "Work permit" },
       res: { citizen: "your Canadian passport", greencard: "your Permanent Resident card", permit: "your valid work permit", none: "a valid non-Jamaican passport, PR card or work permit" },
       idNum: "Social Insurance Number", notary: "a Canadian notary public", notaryExtra: "",
@@ -843,7 +904,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       jn: ["Representative offices in Toronto and Brampton, Ontario", "jnbank.com"],
       vm: ["From the USA/Canada: 1-866-967-8627", "myvmgroup.com"],
       ncb: ["USA & Canada: 1-866-622-3477 · jncb.com"], scotia: ["USA & Canada toll-free: 1-866-767-2010", "customercare-jam@scotiabank.com"] },
-    other: { local: false, from: "abroad", fromw: "from abroad", inn: "overseas", adj: "overseas", cur: "US$", code: "USD", rate: 159,
+    other: { empLbl: "Employed", local: false, from: "abroad", fromw: "from abroad", inn: "overseas", adj: "overseas", cur: "US$", code: "USD", rate: 159,
       status: { citizen: "Citizen", greencard: "Permanent resident", permit: "Work permit" },
       res: { citizen: "your passport from the country you live in", greencard: "your permanent residence card", permit: "your valid work permit", none: "a valid non-Jamaican passport, residence card or work permit" },
       idNum: "national tax or ID number", notary: "a local notary public", notaryExtra: " Ask your attorney whether it also needs legalizing at the nearest Jamaican embassy or consulate.",
@@ -857,7 +918,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       taj: ["Taxpayer Registration Centre, 116 East Street, Kingston", "taxpayerregistrationcentre@taj.gov.jm"],
       mission: { name: "Your nearest Jamaican embassy or consulate", lines: ["See the list at mfaft.gov.jm"] },
       jn: ["jnbank.com"], vm: ["myvmgroup.com"], ncb: ["jncb.com"], scotia: ["customercare-jam@scotiabank.com"] },
-    jm: { local: true, from: "Jamaica", fromw: "", inn: "in Jamaica", adj: "Jamaican", cur: "J$", code: "JMD", rate: 1,
+    jm: { empLbl: "Employed (on payroll)", local: true, from: "Jamaica", fromw: "", inn: "in Jamaica", adj: "Jamaican", cur: "J$", code: "JMD", rate: 1,
       status: { citizen: "Citizen", greencard: "Resident", permit: "Work permit" },
       res: { citizen: "", greencard: "", permit: "", none: "" },
       idNum: "", notary: "a Justice of the Peace or notary", notaryExtra: "",
@@ -882,8 +943,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     loanDocs: { name: "NHT loan processing", lines: ["Email documents: loanprocessing@nht.gov.jm", "Or upload them in NHT Online"] },
     taj: { name: "Tax Administration Jamaica", lines: [] },
     consulate: { name: "", lines: [] },
-    mlss: { name: "NIS, Ministry of Labour & Social Security", lines: ["14 National Heroes Circle, Kingston 4", "876-922-8000-13 · clientcare@mlss.gov.jm"] },
-    rgd: { name: "Registrar General's Department", lines: ["Twickenham Park, St. Catherine", "876-749-0550 · 876-619-1260", "information@rgd.gov.jm · order online at rgd.gov.jm"] },
+    mlss: { name: "NIS, Ministry of Labour & Social Security", lines: ["NIS offices across Jamaica: find your nearest at mlss.gov.jm", "876-922-8000-13 · clientcare@mlss.gov.jm"] },
+    rgd: { name: "Registrar General's Department (RGD)", lines: ["Offices across Jamaica: find your nearest at rgd.gov.jm", "Order online at rgd.gov.jm", "876-749-0550 · information@rgd.gov.jm"] },
     notary: { name: "A notary public", lines: ["Many banks and shipping stores notarize documents"] },
     efmp: { name: "NHT partner lenders (EFMP)", lines: ["Including NCB, Scotiabank, JN Bank, JMMB Bank, COK Sodality Credit Union", "Full current list: nht.gov.jm/efmp"] },
     lawyer: { name: "A Jamaican attorney-at-law", lines: ["Prepares the Power of Attorney and handles title, stamping and registration"] },
@@ -949,7 +1010,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
   }
 
   function nhtLaterStep(prefix) {
-    var how = L.local ? "NHT contributions come out of your pay automatically if you're employed. Self-employed? Register with TAJ and pay 3% of your income." : "You can register as an NHT Overseas Voluntary Contributor now. After 2 years of contributions you can apply for NHT benefits.";
+    var how = L.local ? "NHT contributions come out of your pay automatically if you're employed. Self-employed? Register with TAJ and pay 3% of your income after business expenses." : "You can register as an NHT Overseas Voluntary Contributor now. Once NHT verifies 104 weeks of contributions, including the 52 weeks right before you apply, you can apply for a loan.";
     return { id: prefix + "-nht", when: "Optional", title: "Keep the NHT option open",
       body: "<p>" + how + " NHT benefits include a low-interest loan for your next home, and a homeowner's loan for people who bought without NHT financing.</p><p>Switch to the <strong>NHT loan</strong> path at the top to see those steps.</p>",
       contacts: [C.nht] };
@@ -1030,7 +1091,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
         (state.mort === "yes" ? "<li>Your mortgage account details, so your attorney can get a payoff statement.</li>" : "") + "</ul>",
       contacts: [C.lawyer, C.taj] });
     if (!travel) s.push({ id: "s-poa", when: "Week 2–4", title: "Appoint someone in Jamaica with a Power of Attorney",
-      body: "<p>A trusted person in Jamaica can sign the sale documents for you, so you never need to fly in.</p><ul><li>Your attorney prepares it. You sign it in front of " + L.notary + "." + L.notaryExtra + "</li><li>In Jamaica it must be stamped and recorded at the Island Record Office (Registrar General's Department), and lodged at the Office of Titles for land dealings.</li><li>Give the power only for this sale if you prefer, and choose someone who'll answer quickly.</li></ul>",
+      body: "<p>A trusted person in Jamaica can sign the sale documents for you, so you may not need to fly in. Your attorney will confirm what can be done remotely.</p><ul><li>Your attorney prepares it. You sign it in front of " + L.notary + "." + L.notaryExtra + "</li><li>In Jamaica it must be stamped and recorded at the Island Record Office (Registrar General's Department), and lodged at the Office of Titles for land dealings.</li><li>Give the power only for this sale if you prefer, and choose someone who'll answer quickly.</li></ul>",
       contacts: [C.lawyer, C.rgd] });
     if (state.occ !== "empty") s.push({ id: "s-occ", when: "Before listing", title: state.occ === "tenant" ? "Plan around your tenants" : "Plan viewings with the people living there",
       body: state.occ === "tenant"
@@ -1047,7 +1108,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       body: "<ul><li>Your attorney asks your lender for a payoff statement.</li><li>The mortgage is paid from the sale money at completion, and the lender gives a discharge so the title transfers clean.</li></ul>",
       contacts: [C.lawyer] });
     s.push({ id: "s-close", when: "Completion", title: "Transfer tax, completion and the new title",
-      body: "<ul><li>Your attorney pays the 2% transfer tax and registers the transfer at the National Land Agency. In Trelawny, Hanover, Westmoreland and St. Elizabeth the transfer tax is cut by half for two years from 2026, so ask your attorney if it applies to you.</li><li>The buyer pays the balance. Your attorney pays your costs and the agent's commission, then releases the rest to you.</li><li>Ask for a written statement showing every deduction before money is sent.</li></ul>",
+      body: "<ul><li>Your attorney pays the 2% transfer tax and registers the transfer at the National Land Agency. The Government announced in March 2026 that transfer tax will be halved for two years in Trelawny, Hanover, Westmoreland and St. Elizabeth. Ask your attorney whether it's in effect and applies to your sale.</li><li>The buyer pays the balance. Your attorney pays your costs and the agent's commission, then releases the rest to you.</li><li>Ask for a written statement showing every deduction before money is sent.</li></ul>",
       contacts: [C.lawyer, C.agent] });
     if (!L.local) {
       s.push({ id: "s-money", when: "After completion", title: "Get your money to " + L.from,
@@ -1063,7 +1124,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     var s = [], self = state.emp === "self", buying = state.goal === "buy" || state.goal === "lot";
     s.push(trnStep());
     if (self) s.push({ id: "n-self", when: "Now", title: "Register and pay as a self-employed contributor",
-      body: "<ul><li>Register as a taxpayer with Tax Administration Jamaica. NHT then registers you as a self-employed contributor automatically.</li><li>Pay 3% of your income, every quarter, on time.</li><li>To apply for a loan you need at least 52 weeks of contributions, with your last two quarterly payments paid.</li></ul>",
+      body: "<ul><li>Register as a taxpayer with Tax Administration Jamaica. NHT then registers you as a self-employed contributor automatically.</li><li>Pay 3% of your income after business expenses, every quarter, on time.</li><li>To apply for a loan you need at least 52 weeks of contributions, with your last two quarterly payments paid.</li></ul>",
       contacts: [C.taj, C.nht] });
     else s.push({ id: "n-check", when: "Now", title: "Check your NHT contributions",
       body: "<ul><li>If you're employed, NHT comes out of your pay automatically (2% from you, 3% from your employer).</li><li>Register on NHT Online with your TRN and check your contribution history.</li><li>To apply for a loan you need at least 52 weekly contributions, with 13 of them in the last 26 weeks.</li><li>Missing contributions? Ask your employer's payroll to fix it before you apply.</li></ul>",
@@ -1071,8 +1132,8 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     if (state.nis === "no") s.push({ id: "nis", when: "Week 1–3", title: "Get or recover your NIS number",
       body: "<p>The NHT loan checklist lists your NIS card.</p><ul><li>Apply at any NIS office with your birth certificate, ID and TRN.</li><li>Lost your card? The Ministry can confirm your number and reissue it.</li></ul>",
       contacts: [C.mlss] });
-    s.push({ id: "birth", when: "Week 1–4", title: "Order a new certified birth certificate",
-      body: "<p>The loan interview asks for a certified copy of your <em>new</em> birth certificate. Order it online at rgd.gov.jm or at an RGD office.</p>",
+    s.push({ id: "birth", when: "Week 1–4", title: "Have your new certified birth certificate ready",
+      body: "<p>The loan interview asks for a certified copy of your <em>new</em> birth certificate (the current security-paper version).</p><ul><li>Already have one? You're set. Tick this step done.</li><li>Only have the old version? Order the new one online at rgd.gov.jm or at any RGD office.</li></ul>",
       contacts: [C.rgd] });
     s.push({ id: "goal", when: "Before you apply", title: "Pick your loan and line up the property paperwork",
       body: "<p>You're aiming for a <strong>" + goalText[state.goal].title + "</strong>. Check your limit and payment in the planners below.</p><ul>" + (buying ? "<li><strong>Contact Odeen, your real estate agent, before you choose a property.</strong> He'll find options that fit your NHT loan and top-up, and handle the purchase with the seller and attorneys.</li>" : "") + goalText[state.goal].docs + "<li>You'll also need a current passport-size photo and two valid IDs.</li></ul>",
@@ -1123,12 +1184,12 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
         body: "<p>The NHT contributor form asks for your NIS number, and the loan checklist lists your NIS card. Start this early.</p><ul><li>Download the NIS registration form from mlss.gov.jm.</li><li>You'll need an original or notarized copy of your birth certificate or passport, plus your TRN.</li><li>From abroad, a relative or agent in Jamaica can submit for you with a notarized authorization letter. If you had a number before and lost it, email the Ministry with a copy of your ID.</li></ul>",
         contacts: [C.mlss] });
     }
-    s.push({ id: "birth", when: "Week 1–4", title: "Order a new certified birth certificate",
-      body: "<p>The loan interview asks for a certified copy of your <em>new</em> birth certificate (the current security-paper version). Order it now so it's ready when you apply.</p><ul><li>Order online at rgd.gov.jm with a credit card, or through the Jamaican mission " + L.inn + ".</li><li>If your name has changed, also have your marriage certificate or deed poll ready.</li></ul>",
+    s.push({ id: "birth", when: "Week 1–4", title: "Have your new certified birth certificate ready",
+      body: "<p>The loan interview asks for a certified copy of your <em>new</em> birth certificate (the current security-paper version).</p><ul><li>Already have one? You're set. Tick this step done.</li><li>Only have the old version? Order the new one now so it's ready when you apply. Order online at rgd.gov.jm with a credit card, or through the Jamaican mission " + L.inn + ".</li><li>If your name has changed, also have your marriage certificate or deed poll ready.</li></ul>",
       contacts: abroadContacts([C.rgd, C.consulate]) });
     if (prior) {
       s.push({ id: "history", when: "Week 2", title: state.prior === "unsure" ? "Find out if you already have NHT contributions" : "Check your old contributions",
-        body: "<ul><li>Register on NHT Online with your TRN and look at your contribution history.</li><li>Previous contributors only need 1 year of on-time payments after re-registering before they can apply. You can pay that year as a lump sum, but you still wait out the year.</li><li>If NHT assessed you for work in Jamaica and you never paid it, you owe that amount with interest. Ask NHT to confirm your balance first.</li>" + (state.prior === "unsure" ? "<li>If the record shows nothing, follow the new-contributor timeline (2 years).</li>" : "") + "</ul>",
+        body: "<ul><li>Register on NHT Online with your TRN and look at your contribution history.</li><li>Overseas voluntary contributors generally need at least 104 weeks of contributions, including 52 paid in the period immediately before applying. Earlier Jamaica contributions may count toward the 104, so if you already have 52 or more, you may need only about a year of new payments. NHT must verify your record.</li><li>Enter your earlier weeks in the eligibility planner below for an estimate.</li><li>If NHT assessed you for work in Jamaica and you never paid it, you owe that amount with interest. Ask NHT to confirm your balance first.</li>" + (state.prior === "unsure" ? "<li>If the record shows nothing, plan on the full 104 weeks (about 2 years).</li>" : "") + "</ul>",
         contacts: [C.nhtOnline, C.nht] });
     }
     s.push({ id: "docs", when: "Week 2", title: "Gather your registration documents",
@@ -1195,7 +1256,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       document.getElementById("pathPill").textContent = L.local ? "Selling in Jamaica" : "Selling from overseas";
       document.getElementById("pathTitle").textContent = "Your roadmap to selling your " + { house: "house", apt: "apartment", land: "land" }[state.sgoal] + (L.local ? "" : " " + L.fromw);
     } else if (state.path === "nht") {
-      document.getElementById("pathPill").textContent = "NHT loan · " + (L.local ? "52 weeks of contributions needed" : prior ? "returning contributor, 1-year wait" : "new contributor, 2-year wait");
+      document.getElementById("pathPill").textContent = "NHT loan · " + (L.local ? "52 weeks of contributions needed" : prior ? "returning contributor, NHT confirms your weeks" : "new contributor, about 2 years");
       document.getElementById("pathTitle").textContent = "Your roadmap to an NHT " + goalText[state.goal].title;
     } else if (state.path === "bank") {
       document.getElementById("pathPill").textContent = "Bank mortgage · apply when ready";
@@ -1221,7 +1282,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
 
     var lt = document.getElementById("loanType");
     if (lt.dataset.user !== "1") lt.value = state.goal;
-    calc(); loan(); timeline(); costs(); sellCalc(); searchLink(); aff(); renderLenders(); renderDir(); waLinks();
+    syncPrices(); calc(); loan(); timeline(); costs(); sellCalc(); aff(); renderLenders(); renderDir(); renderDocs(); readiness(); waLinks();
   }
 
   function applyPath() {
@@ -1232,12 +1293,13 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       var dp = el.getAttribute("data-paths");
       el.hidden = (dp && dp.split(" ").indexOf(key) < 0) || (el.hasAttribute("data-abroad") && L.local);
     });
+    document.getElementById("empBtn").textContent = L.empLbl;
     document.getElementById("stCitizen").textContent = L.status.citizen;
     document.getElementById("stPr").textContent = L.status.greencard;
     document.getElementById("stPermit").textContent = L.status.permit;
-    document.getElementById("nhtCardSub").textContent = L.local ? "Contribute through your job (or as self-employed), then borrow at NHT's low rates. A partner bank can top it up." : "Join NHT from abroad, pay in 3% of your income, then borrow at NHT's low rates. A partner bank can top it up.";
-    document.getElementById("nhtCardWhen").textContent = L.local ? "After 52 weeks of contributions" : "After 2 years of contributions (1 year if you paid NHT before)";
-    document.querySelectorAll(".fxLbl").forEach(function (lb) { lb.textContent = "1 " + L.code + " = J$ (example; use today's rate)"; });
+    document.getElementById("nhtCardSub").textContent = L.local ? "Contribute through your job (or as self-employed), then borrow at NHT's low rates. A partner bank can top it up." : "Join NHT from abroad, pay 3% of your earnings each month, then borrow at NHT's low rates. A partner bank can top it up.";
+    document.getElementById("nhtCardWhen").textContent = L.local ? "After 52 weeks of contributions" : "After 104 weeks of contributions. Earlier weeks may shorten this once NHT verifies them";
+    document.querySelectorAll(".fxLbl").forEach(function (lb) { lb.textContent = "1 " + L.code + " = J$ (example; check today's rate at boj.org.jm)"; });
     document.getElementById("lfLocal").textContent = "Contact " + L.inn;
     document.querySelectorAll("#modeCards .pcard").forEach(function (b) {
       var on = b.getAttribute("data-mode") === state.mode;
@@ -1275,6 +1337,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       ? "Only NHT's External Financing Mortgage Programme (EFMP) partners can process your NHT loan and a top-up together. " + (L.local ? "Compare 2 or 3 of them." : "Start with the lenders that have offices or phone lines " + L.inn + ".") + " Then check that they handle your loan type (some partners haven't offered construction loans)" + (L.local ? "." : " and accept income from an overseas voluntary contributor.")
       : "These are Jamaica's main mortgage lenders. " + (L.local ? "Compare quotes from 2 or 3 of them." : "Start with the ones that have offices or phone lines " + L.inn + ", then compare their quotes for overseas borrowers.");
     document.getElementById("cDepField").hidden = cash;
+    document.getElementById("cCashDepField").hidden = !cash;
     document.getElementById("cFeeField").hidden = cash;
   }
 
@@ -1288,16 +1351,29 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       ["Your attorney (" + fmt(atty * 100, 2) + "% + 15% GCT)", price * atty * 1.15, true],
       ["Registration fee (your half of 0.5%)", price * 0.0025, true],
       ["Stamp duty (your half of J$5,000)", 2500, true],
-      ["Agreement for sale (your share, estimate)", price * 0.002 * 1.15, true],
+      ["Agreement for sale (separate fee, estimate)", document.getElementById("cAgr").checked ? price * 0.002 * 1.15 : 0, true],
       ["Valuation and survey", num("cVal"), true]
     ];
     if (!cash) rows.push(["Lender's fees (estimate)", loanAmt * num("cFee") / 100, true]);
+    rows = rows.filter(function (r, i) { return i === 0 || r[1] > 0 || r[0].indexOf("Valuation") === 0; });
     var closing = rows.filter(function (r) { return r[2]; }).reduce(function (a, r) { return a + r[1]; }, 0);
     var upfront = rows[0][1] + closing;
+    var cashDep = Math.min(100, Math.max(0, num("cCashDep")));
+    var depAmt = cash ? price * cashDep / 100 : price * dep / 100;
+    var sBefore = num("cVal");
+    var agr = document.getElementById("cAgr").checked ? price * 0.002 * 1.15 : 0;
+    var sSign = depAmt + agr;
+    var sDone = price * atty * 1.15 + price * 0.0025 + 2500 + (cash ? 0 : loanAmt * num("cFee") / 100) + (cash ? price - depAmt : 0);
+    nums.stages = [["Before you sign: valuation and survey", sBefore], ["On signing: deposit" + (cash ? " (" + fmt(cashDep, 0) + "%)" : "") + (agr ? " and agreement for sale" : ""), sSign], ["At completion: " + (cash ? "balance of the price (" + fmt(100 - cashDep, 0) + "%), " : "") + "attorney, registration, stamp duty" + (cash ? "" : ", lender fees"), sDone]];
+    nums.upfront = upfront; nums.price = price; nums.loanAmt = loanAmt;
+    var fxS = fx;
+    document.getElementById("stageRows").innerHTML = nums.stages.map(function (s) { return "<tr><td>" + s[0] + "</td><td>J$" + fmt(s[1], 0) + home(s[1], fxS) + "</td></tr>"; }).join("") +
+      (cash ? "" : "<tr><td>At completion: your loan pays the rest of the price</td><td>J$" + fmt(loanAmt, 0) + "</td></tr>") +
+      '<tr><td colspan="2" style="color:var(--muted); font-size:0.85rem;">Typical timing. The deposit, payment dates and balance are set by your Agreement for Sale, and your attorney confirms them.</td></tr>';
     function usd(j) { return home(j, fx); }
     var html = rows.map(function (r) { return "<tr><td>" + r[0] + "</td><td>J$" + fmt(r[1], 0) + "</td></tr>"; }).join("");
     html += '<tr class="total"><td>Closing costs (' + (price ? fmt(closing / price * 100, 1) : 0) + "% of price)</td><td>J$" + fmt(closing, 0) + usd(closing) + "</td></tr>";
-    html += '<tr class="total"><td>' + (cash ? "Total cash needed" : "Cash needed upfront (deposit + closing costs)") + "</td><td>J$" + fmt(upfront, 0) + usd(upfront) + "</td></tr>";
+    html += '<tr class="total"><td>' + (cash ? "Total estimated cash you'll need" : "Total estimated cash you'll need (deposit + closing costs)") + "</td><td>J$" + fmt(upfront, 0) + usd(upfront) + "</td></tr>";
     if (!cash) html += "<tr><td>Loan needed for the rest</td><td>J$" + fmt(loanAmt, 0) + "</td></tr>";
     document.getElementById("costRows").innerHTML = html;
   }
@@ -1305,18 +1381,21 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
   function sellCalc() {
     var price = num("sPrice"), fx = num("sRate");
     var tt = document.getElementById("sHalf").checked ? 0.01 : 0.02;
+    var ttBase = Math.max(price, num("sMV") || 0);
     var rows = [
       ["Agent's commission (" + fmt(num("sComm"), 2) + "% + 15% GCT)", price * num("sComm") / 100 * 1.15],
-      ["Transfer tax (" + (tt * 100) + "%)", price * tt],
+      ["Transfer tax (" + (tt * 100) + "% of " + (ttBase > price ? "market value" : "sale price") + ")", ttBase * tt],
       ["Your attorney (" + fmt(num("sAtty"), 2) + "% + 15% GCT)", price * num("sAtty") / 100 * 1.15],
       ["Registration fee (your half of 0.5%)", price * 0.0025],
       ["Stamp duty (your half of J$5,000)", 2500],
-      ["Agreement for sale (your share, estimate)", price * 0.002 * 1.15],
+      ["Agreement for sale (separate fee, estimate)", document.getElementById("sAgr").checked ? price * 0.002 * 1.15 : 0],
       ["Other costs", num("sOther")]
     ];
-    if (num("sMort") > 0) rows.push(["Mortgage payoff", num("sMort")]);
+    if (num("sMort") > 0) { rows.push(["Mortgage payoff", num("sMort")]); rows.push(["Mortgage discharge fees (estimate)", num("sDisch")]); }
+    rows = rows.filter(function (r) { return r[1] > 0 || r[0] === "Other costs"; });
     var total = rows.reduce(function (a, r) { return a + r[1]; }, 0);
     var net = price - total;
+    nums.net = net; nums.sellTotal = total; nums.sprice = price;
     function usd(j) { return home(j, fx); }
     var html = rows.map(function (r) { return "<tr><td>" + r[0] + "</td><td>J$" + fmt(r[1], 0) + "</td></tr>"; }).join("");
     html += '<tr class="total"><td>Total deductions (' + (price ? fmt(total / price * 100, 1) : 0) + "% of price)</td><td>J$" + fmt(total, 0) + usd(total) + "</td></tr>";
@@ -1351,11 +1430,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     document.querySelectorAll(".wa-link").forEach(function (a) { a.href = href; });
   }
 
-  function searchLink() {
-    var cat = document.getElementById("srCat").value, par = document.getElementById("srParish").value;
-    var url = "https://www.realtyonegrouptitans.com/property-search?category=" + cat + (par ? "&parish=" + encodeURIComponent(par) : "");
-    document.getElementById("srGo").href = url;
-  }
+
 
   function home(j, fx) { return (L.local || !fx) ? "" : " · ≈" + L.cur + fmt(j / fx, 0); }
   function homeP(j, fx) { return (L.local || !fx) ? "" : " (≈" + L.cur + fmt(j / fx, 0) + ")"; }
@@ -1419,6 +1494,221 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     gap();
   }
 
+  var nums = { stages: [], upfront: 0, price: 0, net: 0, monthly: 0 };
+
+  function docItems() {
+    var d = [], abroad = !L.local, self = state.emp === "self", travel = L.local || state.travel === "yes";
+    if (state.mode === "sell") {
+      d.push("Duplicate Certificate of Title");
+      d.push("TRN and valid ID for everyone on the title");
+      d.push("Property tax receipts, paid up to date");
+      d.push("Recent water and electricity bills, paid up");
+      d.push("Surveyor's ID report");
+      if (state.sgoal === "apt") d.push("Strata letter showing maintenance fees are paid up");
+      if (state.owners === "estate") d.push("Probate or letters of administration, and the death certificate");
+      if (state.owners === "joint") d.push("Signed agreement from every co-owner");
+      if (state.mort === "yes") d.push("Mortgage payoff statement from your lender");
+      if (state.occ === "tenant") d.push("Tenancy agreement and notice to tenants");
+      if (!travel) d.push("Recorded Power of Attorney");
+      return d;
+    }
+    d.push(L.local ? "Valid ID (passport, driver's licence or voter ID)" : "Valid passport");
+    d.push("TRN card or TAJ letter");
+    d.push(L.local ? "Proof of address (recent utility bill)" : "Proof of address " + L.inn + " (recent utility bill or bank statement)");
+    if (abroad && state.path !== "cash") d.push("Proof of residency: " + L.res[state.status]);
+    if (state.path === "nht") {
+      d.push("NIS card");
+      d.push("Certified copy of your new birth certificate");
+      d.push("Marriage certificate or deed poll, if your name has changed");
+      d.push("Two valid IDs and a passport-size photo");
+      if (abroad) { d.push("Voluntary Contributor Application Form"); d.push("Proof of income: " + (self ? L.nhtSelf : L.nhtEmp)); }
+      else d.push(self ? "NHT payment receipts (self-employed)" : "Job letter and your last 2 payslips");
+      d.push("NHT eligibility letter");
+      d.push("Lender's application documents (top-up loan)");
+    } else if (state.path === "bank") {
+      d.push("Income documents: " + (self ? L.selfDocs : L.empDocs));
+      d.push(L.local ? "Bank statements (last 3 to 6 months)" : L.credit.replace(/\.$/, ""));
+      d.push("Pre-qualification letter from your lender");
+      d.push("Property insurance quote");
+    } else {
+      d.push("Bank statements for the account holding your funds");
+      d.push("Records of where the money came from (savings, sale, business, inheritance)");
+      d.push("Signed gift letter, if any of the money is a gift");
+    }
+    if (state.goal === "build") { d.push("Registered title for your land"); d.push("Approved building plans and builder's estimate"); }
+    else if (state.goal !== "scheme") { d.push("Signed Agreement for Sale"); d.push("Copy of the property's title"); d.push("Surveyor's ID report"); if (state.path !== "cash") d.push("Valuation report"); }
+    if (abroad && !travel) d.push("Recorded Power of Attorney");
+    return d;
+  }
+  function docKey(t) { return t.toLowerCase().replace(/[^a-z0-9]+/g, "-").slice(0, 60); }
+  function renderDocs() {
+    var items = docItems(), got = 0;
+    document.getElementById("docList").innerHTML = items.map(function (t, i) {
+      var k = docKey(t), on = !!docsDone[k]; if (on) got++;
+      return '<li class="' + (on ? "got" : "") + '"><label for="doc-' + i + '"><input type="checkbox" id="doc-' + i + '" data-k="' + k + '"' + (on ? " checked" : "") + '><span>' + t + '</span></label></li>';
+    }).join("");
+    document.getElementById("docsCount").textContent = got + " of " + items.length + " ready";
+    nums.docs = { got: got, total: items.length, missing: items.filter(function (t) { return !docsDone[docKey(t)]; }) };
+  }
+  document.getElementById("docList").addEventListener("change", function (e) {
+    var k = e.target.getAttribute("data-k"); if (!k) return;
+    docsDone[k] = e.target.checked; save(); renderDocs(); readiness();
+  });
+
+  function setBuyPrice(v) {
+    state.price = v > 0 ? v : 0;
+    if (v > 0) { document.getElementById("cPrice").value = v; document.getElementById("price").value = v; document.getElementById("cash").value = Math.round(v * num("cDep") / 100); }
+  }
+  function setSellPrice(v) { state.sprice = v > 0 ? v : 0; if (v > 0) document.getElementById("sPrice").value = v; }
+  function syncPrices() {
+    if (state.price > 0 && document.activeElement !== document.getElementById("cPrice") && document.activeElement !== document.getElementById("price")) { document.getElementById("cPrice").value = state.price; document.getElementById("price").value = state.price; }
+    if (state.sprice > 0 && document.activeElement !== document.getElementById("sPrice")) setSellPrice(state.sprice);
+  }
+  document.getElementById("rPrice").addEventListener("input", function (e) {
+    var v = Math.round(+e.target.value || 0);
+    if (state.mode === "sell") { setSellPrice(v); sellCalc(); } else { setBuyPrice(v); gap(); costs(); }
+    save(); readiness();
+  });
+  ["cPrice", "price"].forEach(function (id) { document.getElementById(id).addEventListener("input", function (e) { state.price = Math.round(+e.target.value || 0); save(); }); });
+  document.getElementById("sPrice").addEventListener("input", function (e) { state.sprice = Math.round(+e.target.value || 0); save(); });
+  document.addEventListener("input", function (e) { if (e.target.id !== "rPrice") readiness(); });
+
+  function readiness() {
+    var it = [], verdict = "", selling = state.mode === "sell", abroad = !L.local, travel = L.local || state.travel === "yes";
+    function add(st, t) { it.push([st, t]); }
+    add(state.trn === "yes" ? "ok" : "todo", state.trn === "yes" ? "You have a TRN." : (L.local ? "Get your TRN at any TAJ office." : "Apply for your TRN by mail (allow a few weeks)."));
+    if (selling) {
+      if (state.owners === "estate") add("stop", "Probate or letters of administration are needed before the property can be sold.");
+      if (state.owners === "joint") add("todo", "Every co-owner must agree to the sale and sign.");
+      if (state.mort === "yes") add("todo", "Ask your lender for a mortgage payoff statement.");
+      if (state.occ === "tenant") add("todo", "Plan notice and viewings with your tenants.");
+      if (abroad && !travel) add("todo", "Set up a Power of Attorney for someone in Jamaica.");
+      if (state.sprice) add("info", "Estimated take-home at J$" + fmt(nums.sprice || 0, 0) + ": about J$" + fmt(nums.net || 0, 0) + " after costs.");
+      else add("todo", "Add the price you have in mind above to see your estimated take-home. Not sure? Odeen can give you a price opinion.");
+      verdict = state.owners === "estate" ? "Not ready to list yet: sort out the estate first." : "Ready for a price opinion from Odeen.";
+    } else {
+      if (abroad && state.path !== "cash" && state.status === "none") add("stop", "Confirm what proof of residency NHT or your lender will accept.");
+      if (state.path === "nht") {
+        if (L.local) add("todo", state.emp === "self" ? "Confirm your last two quarterly NHT payments are made." : "Confirm you have 52 weekly NHT contributions, 13 in the last 26 weeks.");
+        else add("todo", (state.prior === "no" ? "Register and start contributing." : "Check your NHT record and enter your weeks in the planner.") + " Estimated eligibility review: " + document.getElementById("earliest").textContent + ", if you pay every month on time and NHT verifies your record.");
+        if (state.nis === "no") add("todo", "Get or recover your NIS number.");
+      } else if (state.path === "bank") add("todo", "Get pre-qualified by 2 or 3 lenders.");
+      else add("todo", "Get your proof of funds ready.");
+      if (state.price) add("info", "Cash you'll need for a J$" + fmt(nums.price, 0) + " " + (state.goal === "build" ? "build" : "home") + ": about J$" + fmt(nums.upfront || 0, 0) + " (" + (state.path === "cash" ? "full price" : "deposit") + " + closing costs).");
+      else add("todo", "Add the price you're aiming for above to see the cash you'll need.");
+      if (abroad && !travel) add("todo", "Set up a Power of Attorney for someone in Jamaica.");
+      var stop = it.some(function (x) { return x[0] === "stop"; });
+      if (stop) verdict = "Not ready yet: sort out the item marked Check first.";
+      else if (state.path === "nht") verdict = L.local ? "Check your contributions, then get your eligibility letter." : "Start contributing now. Use the wait to save your deposit and line up a property with Odeen.";
+      else if (state.path === "bank") verdict = state.trn === "yes" ? "Next: get pre-qualified so you know your budget, then start viewing with Odeen." : "Get your TRN, then get pre-qualified.";
+      else verdict = state.trn === "yes" ? "Ready to start viewing. Have your proof of funds ready before you make an offer." : "Start viewing while you get your TRN. You'll need it, and your proof of funds, before you make an offer.";
+    }
+    if (nums.docs) add(nums.docs.got === nums.docs.total ? "ok" : "todo", nums.docs.got + " of " + nums.docs.total + " documents ready (see your document checklist).");
+    nums.ready = { verdict: verdict, items: it };
+    var lbl = { ok: "Ready", todo: "To do", stop: "Check", info: "Note" };
+    var rl = document.getElementById("rPriceLbl"), rp = document.getElementById("rPrice");
+    rl.textContent = selling ? "Price you have in mind (J$)" : state.goal === "build" ? "Your building budget (J$)" : state.goal === "lot" ? "Price of the land you're aiming for (J$)" : "Price of the home you're aiming for (J$)";
+    document.getElementById("rPriceHint").textContent = selling ? "A rough figure is fine. Odeen can give you a price opinion." : "Not sure yet? The affordability calculator below gives you a range.";
+    var pv = selling ? state.sprice : state.price;
+    if (document.activeElement !== rp) rp.value = pv || "";
+    document.getElementById("readyBody").innerHTML = '<div class="verdict">' + verdict + '</div><ul>' +
+      it.map(function (x) { return '<li><span class="pill ' + (x[0] === "info" ? "ok" : x[0]) + '">' + lbl[x[0]] + '</span><span>' + x[1] + '</span></li>'; }).join("") + "</ul>";
+  }
+
+  function planLink() {
+    var enc = btoa(unescape(encodeURIComponent(JSON.stringify(state))));
+    return location.origin + location.pathname + "?plan=" + enc;
+  }
+  function openReport() {
+    var selling = state.mode === "sell", fx = L.local ? 0 : (num("rate") || 0);
+    var today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+    var where = { us: "USA", uk: "United Kingdom", ca: "Canada", jm: "Jamaica", other: "Outside Jamaica" }[state.country];
+    var plan = selling ? "Selling a " + { house: "house", apt: "apartment or townhouse", land: "piece of land" }[state.sgoal] : "Buying " + { buy: "a house", lot: "land", build: "(building on own land)", scheme: "an NHT scheme unit" }[state.goal] + " with " + { nht: "an NHT loan", bank: "a bank mortgage", cash: "cash" }[state.path];
+    var rows = [["Where you live", where], ["Your plan", plan]];
+    if (selling) {
+      if (state.sprice) { rows.push(["Price in mind", "J$" + fmt(nums.sprice, 0)]); rows.push(["Estimated take-home", "J$" + fmt(nums.net, 0) + home(nums.net, fx)]); }
+      else rows.push(["Price in mind", "Not set yet. Odeen can give you a price opinion."]);
+    } else {
+      if (state.price) {
+        rows.push([state.goal === "build" ? "Building budget" : "Price you're aiming for", "J$" + fmt(nums.price, 0) + home(nums.price, fx)]);
+        if (state.path !== "cash") rows.push(["Estimated monthly payment", "J$" + fmt(nums.monthly, 0) + homeP(nums.monthly, fx)]);
+      } else rows.push(["Price you're aiming for", "Not set yet"]);
+      if (state.path === "nht" && !L.local) rows.push(["Estimated NHT eligibility review", document.getElementById("earliest").textContent + " (NHT confirms)"]);
+    }
+    var money = (selling || !state.price) ? "" : '<div><h3>Money you\'ll need</h3><table>' + nums.stages.map(function (s) { return "<tr><td>" + s[0] + "</td><td style=\"text-align:right; white-space:nowrap;\">J$" + fmt(s[1], 0) + "</td></tr>"; }).join("") + '<tr class="total"><td>Total estimated cash</td><td style="text-align:right; white-space:nowrap;">J$' + fmt(nums.upfront, 0) + home(nums.upfront, fx) + "</td></tr></table></div>";
+    var next = lastSteps.filter(function (s) { return !done[s.id]; }).slice(0, 4);
+    var miss = (nums.docs && nums.docs.missing) || [];
+    var lbl = { ok: "Ready", todo: "To do", stop: "Check", info: "Note" };
+    var html = '<div class="rep-head"><img src="' + document.querySelector(".brand-logo").src + '" alt="Realty ONE Group Titans"><div class="who">Prepared ' + today + '<br>with Odeen Cunningham, Licensed Real Estate Salesman</div></div>' +
+      '<h2>Your property plan</h2><table>' + rows.map(function (r) { return "<tr><td style=\"color:#55665e;\">" + r[0] + "</td><td><strong>" + r[1] + "</strong></td></tr>"; }).join("") + "</table>" +
+      '<div class="rep-grid"><div><h3>Readiness</h3><p><strong>' + nums.ready.verdict + '</strong></p><ul style="margin:0; padding-left:18px; display:grid; gap:4px;">' + nums.ready.items.map(function (x) { return "<li>" + lbl[x[0]] + ": " + x[1] + "</li>"; }).join("") + "</ul></div>" +
+      (money || "<div><h3>Documents still needed</h3><ul style=\"margin:0; padding-left:18px; display:grid; gap:4px;\">" + miss.slice(0, 10).map(function (t) { return "<li>" + t + "</li>"; }).join("") + "</ul></div>") + "</div>" +
+      '<div class="rep-grid"><div><h3>Your next steps</h3><ol style="margin:0; padding-left:18px; display:grid; gap:4px;">' + next.map(function (s) { return "<li>" + s.title + "</li>"; }).join("") + "</ol></div>" +
+      (money ? "<div><h3>Documents still needed (" + miss.length + ")</h3><ul style=\"margin:0; padding-left:18px; display:grid; gap:4px;\">" + miss.slice(0, 8).map(function (t) { return "<li>" + t + "</li>"; }).join("") + (miss.length > 8 ? "<li>and " + (miss.length - 8) + " more</li>" : "") + "</ul></div>" : "<div></div>") + "</div>" +
+      '<div class="rep-contact"><div class="agent-photo" role="img" aria-label="Odeen Cunningham"></div><div><strong>Odeen Cunningham</strong> · Realty ONE Group Titans · Licence S-4385<br>876-305-5553 (WhatsApp) · ocunningham@realtyonegrouptitans.com · @realhousesofjamaica</div></div>' +
+      '<p style="font-size:0.8rem; color:#55665e; margin:0;">Estimates only, based on the answers and figures entered in the guide. Not a loan approval, legal or tax advice. NHT, your lender and your attorney confirm actual amounts, eligibility and dates.</p>';
+    document.getElementById("repSheet").innerHTML = html;
+    var txt = "Hi Odeen, here's my property plan from your guide.\n" + rows.map(function (r) { return r[0] + ": " + r[1]; }).join("\n") + "\nReadiness: " + nums.ready.verdict + "\nMy plan: " + planLink();
+    document.getElementById("repSend").href = "https://wa.me/18763055553?text=" + encodeURIComponent(txt);
+    document.getElementById("report").hidden = false;
+    document.body.classList.add("report-open");
+    document.getElementById("repClose").focus();
+  }
+  function closeReport() { document.getElementById("report").hidden = true; document.body.classList.remove("report-open"); }
+  document.getElementById("reportBtn").addEventListener("click", openReport);
+  document.getElementById("repClose").addEventListener("click", closeReport);
+  document.getElementById("repPrint").addEventListener("click", function () { try { window.print(); } catch (e) { toast("Printing isn't available here. Open the guide in your browser to print."); } });
+  document.addEventListener("keydown", function (e) { if (e.key === "Escape") closeReport(); });
+
+  var TSTAGES = {
+    cash: [["Offer accepted", "The seller has accepted your offer. The attorneys are preparing the Agreement for Sale.", "Seller's attorney"],
+      ["Agreement signed and deposit paid", "Your Agreement for Sale is signed and your deposit is with the attorneys.", "You and the attorneys"],
+      ["Stamping and title checks", "The agreement is being stamped and your attorney is checking the title, taxes and bills.", "The attorneys"],
+      ["Balance paid", "The balance of the price and your closing costs are with your attorney.", "You and your attorney"],
+      ["Registration at the National Land Agency", "The transfer is being registered and the new title is being issued in your name.", "Your attorney and the NLA"],
+      ["Completion and keys", "The purchase is complete. The title is in your name and the keys are handed over.", "Odeen and the attorneys"]],
+    bank: [["Offer accepted", "The seller has accepted your offer. The attorneys are preparing the Agreement for Sale.", "Seller's attorney"],
+      ["Agreement signed and deposit paid", "Your Agreement for Sale is signed and your deposit is with the attorneys.", "You and the attorneys"],
+      ["Mortgage application and valuation", "Your lender is reviewing your application and arranging the valuation.", "Your lender"],
+      ["Commitment letter issued", "Your lender has approved the mortgage and issued its commitment letter.", "Your lender"],
+      ["Stamping and title checks", "The agreement is being stamped and the attorneys are checking the title.", "The attorneys"],
+      ["Loan paid out and registration", "Your lender is paying out the loan, and the transfer and mortgage are being registered.", "Your lender and attorney"],
+      ["Completion and keys", "The purchase is complete. The title is in your name and the keys are handed over.", "Odeen and the attorneys"]],
+    nht: [["Offer accepted", "The seller has accepted your offer. The attorneys are preparing the Agreement for Sale.", "Seller's attorney"],
+      ["Agreement signed and deposit paid", "Your Agreement for Sale is signed and your deposit is with the attorneys.", "You and the attorneys"],
+      ["NHT and lender application", "Your partner lender is processing your NHT loan and any top-up, including the valuation.", "Your lender and NHT"],
+      ["Loan interview and commitment letter", "Your loan interview is done and the commitment letter has been issued.", "Your lender and NHT"],
+      ["Stamping and title checks", "The agreement is being stamped and the attorneys are checking the title.", "The attorneys"],
+      ["Loans paid out and registration", "The NHT loan and top-up are being paid out, and the transfer is being registered.", "Your lender and attorney"],
+      ["Completion and keys", "The purchase is complete. The title is in your name and the keys are handed over.", "Odeen and the attorneys"]],
+    sale: [["Listed and marketing", "Your property is listed, with photos and viewings underway.", "Odeen"],
+      ["Offer accepted", "You've accepted an offer. The attorneys are preparing the Agreement for Sale.", "Odeen and your attorney"],
+      ["Agreement signed and deposit received", "The Agreement for Sale is signed and the buyer's deposit is with the attorneys.", "The attorneys"],
+      ["Stamping and transfer tax", "The agreement is being stamped and the transfer tax is being paid.", "Your attorney"],
+      ["Buyer's financing and balance", "The buyer's loan or balance is being finalized.", "The buyer's lender and attorney"],
+      ["Registration", "The transfer to the buyer is being registered at the National Land Agency.", "The attorneys and the NLA"],
+      ["Completion and money sent", "The sale is complete and your attorney is sending your money.", "Your attorney"]]
+  };
+  function enc64(o) { return btoa(unescape(encodeURIComponent(JSON.stringify(o)))); }
+  function dec64(s) { return JSON.parse(decodeURIComponent(escape(atob(s)))); }
+  function esc(s) { return String(s || "").replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
+  function showTracker(t) {
+    var list = TSTAGES[t.t] || TSTAGES.cash, cur = Math.min(Math.max(0, t.s | 0), list.length - 1);
+    var kind = t.t === "sale" ? "sale" : "purchase";
+    var v = document.getElementById("trackView");
+    v.innerHTML = '<span class="tag">Your ' + kind + ' tracker · with Odeen Cunningham</span>' +
+      '<h2>Hi ' + esc(t.n || "there") + ", here's where your " + kind + " stands</h2>" +
+      (t.p ? '<p style="color:var(--muted);">Reference: ' + esc(t.p) + "</p>" : "") +
+      '<div class="progress"><small>Stage ' + (cur + 1) + " of " + list.length + '</small><div class="bar"><span style="width:' + ((cur + 1) / list.length * 100) + '%"></span></div></div>' +
+      '<div class="now-box"><strong>What\'s happening now: ' + list[cur][0] + "</strong><span>" + esc(t.note || list[cur][1]) + "</span><span style=\"color:var(--muted); font-size:0.9rem;\">Handled by: " + list[cur][2] + (t.x ? " · Next expected: " + esc(t.x) : "") + "</span></div>" +
+      "<ol>" + list.map(function (s, i) { var c = i < cur ? "done" : i === cur ? "now" : ""; return '<li class="' + c + '"><span class="dot">' + (i < cur ? "✓" : i + 1) + "</span><span>" + s[0] + '</span><span class="pill ' + (i < cur ? "ok" : i === cur ? "todo" : "") + '">' + (i < cur ? "Done" : i === cur ? "Now" : "Upcoming") + "</span></li>"; }).join("") + "</ol>" +
+      '<p class="note">Last updated ' + esc(t.u || "") + ". This is a progress summary Odeen sends you on WhatsApp from 876-305-5553, not an official record. Some stages can overlap or happen in a different order, and your attorney confirms dates and amounts. If you got this link from anyone else, check with Odeen before acting on it.</p>" +
+      '<div class="actions"><a class="btn wa" href="https://wa.me/18763055553?text=' + encodeURIComponent("Hi Odeen, a question about my " + kind + (t.p ? " (" + t.p + ")" : "") + ":") + '" target="_blank" rel="noopener">Message Odeen on WhatsApp</a><span class="btn" style="cursor:default;">876-305-5553</span></div>';
+    v.hidden = false;
+  }
+  try { var tq = new URLSearchParams(location.search).get("track"); if (tq) showTracker(dec64(tq)); } catch (e) {}
+
+
   function amort(P, annualPct, years) {
     if (P <= 0) return 0;
     var r = annualPct / 100 / 12, t = Math.max(1, years) * 12;
@@ -1445,6 +1735,13 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     document.getElementById("topPmt").textContent = both(topPay);
     document.getElementById("totPmt").textContent = both(nhtPay + topPay);
     gapState = { top: top, nhtPay: nhtPay, price: price, cash: cash };
+    nums.monthly = nhtPay + topPay;
+    var base = num("topRate"), term = num("topTerm") || 25;
+    document.getElementById("scenHead").textContent = state.path === "nht" ? "Top-up rate (NHT portion stays fixed)" : "Mortgage rate";
+    document.getElementById("rateScen").innerHTML = [-1, 0, 1, 2].filter(function (d) { return base + d >= 0; }).map(function (d) {
+      var pm = nhtPay + amort(top, base + d, term), diff = pm - (nhtPay + topPay);
+      return '<tr class="' + (d === 0 ? "hl" : "") + '"><td>' + fmt(base + d, 2) + "%" + (d === 0 ? " (today)" : "") + "</td><td>J$" + fmt(pm, 0) + homeP(pm, fx) + "</td><td>" + (d === 0 ? "–" : (diff > 0 ? "+" : "−") + "J$" + fmt(Math.abs(diff), 0)) + "</td></tr>";
+    }).join("");
     compare();
   }
 
@@ -1469,7 +1766,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
 
   var LENDERS = [
     { n: "JN Bank", k: "jn", t: "bank", c: ["us", "uk", "ca"], p: "Mortgages for local and overseas buyers, with offices in the US, UK and Canada.", w: "" },
-    { n: "Victoria Mutual (VMBS)", k: "vm", t: "bs", c: ["us", "uk", "ca"], p: "Building society with a diaspora team and overseas offices. You can close digitally.", w: "" },
+    { n: "Victoria Mutual (VMBS)", k: "vm", t: "bs", c: ["us", "uk", "ca"], p: "Building society with a diaspora team and overseas offices. VM says you can complete the process digitally or through its overseas offices.", w: "" },
     { n: "NCB (National Commercial Bank)", k: "ncb", t: "bank", c: ["us", "ca"], p: "Largest bank in Jamaica; one of the first EFMP partners.", w: "" },
     { n: "Scotiabank Jamaica", k: "scotia", t: "bank", c: ["us", "ca"], p: "One of the first EFMP partners; also offers its own mortgage products alongside the NHT loan.", w: "" },
     { n: "JMMB Bank", t: "bank", c: [], lines: [], p: "EFMP partner bank.", w: "jm.jmmb.com" },
@@ -1537,11 +1834,14 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     try { window.print(); } catch (e) { toast("Printing isn't available here. Open the guide in your browser to print."); }
   });
 
+  (function () { var d = new Date(), m = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2); ["regMonth", "startMonth"].forEach(function (id) { var e = document.getElementById(id); if (e && !e.value) e.value = m; }); })();
   var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
   function parseM(v) { if (!v) return null; var p = v.split("-"); return parseInt(p[0], 10) * 12 + parseInt(p[1], 10) - 1; }
   function label(mi) { return MONTHS[((mi % 12) + 12) % 12] + " " + Math.floor(mi / 12); }
   function timeline() {
-    var reg = parseM(document.getElementById("regMonth").value) || parseM("2026-12");
+    var now = new Date(), nowM = now.getFullYear() * 12 + now.getMonth();
+    var reg = parseM(document.getElementById("regMonth").value);
+    if (reg === null) reg = nowM;
     var start = parseM(document.getElementById("startMonth").value);
     if (start === null) start = reg;
     var paid = parseM(document.getElementById("paidThrough").value);
@@ -1553,22 +1853,23 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     document.getElementById("backMonths").textContent = back ? back + " month" + (back === 1 ? "" : "s") : "None";
     document.getElementById("backSum").textContent = back ? L.cur + fmt(monthly * back, 0) + " · J$" + fmt(monthly * back * rate, 0) : "–";
 
-    var weeksDate = start + (prior ? 12 : 24);
-    var waitDate = reg + (prior ? 12 : 24);
-    var earliest = Math.max(weeksDate, waitDate);
+    document.getElementById("priorRow").hidden = !prior;
+    var priorWeeks = prior ? Math.max(0, num("priorWeeks")) : 0;
+    var weeksNeeded = Math.max(52, 104 - priorWeeks);
+    var monthsNeeded = Math.ceil(weeksNeeded * 12 / 52);
+    var earliest = reg + monthsNeeded;
     document.getElementById("earliest").textContent = label(earliest);
 
     var items = [];
     if (state.trn === "no" || state.nis === "no") items.push(["", "Now", "Start your " + [state.trn === "no" ? "TRN" : "", state.nis === "no" ? "NIS" : ""].filter(Boolean).join(" and ") + " application" + (state.trn === "no" && state.nis === "no" ? "s" : "") + " and order your birth certificate."]);
-    if (back) items.push(["", label(start), "Backdated start of contributions (" + back + " month" + (back === 1 ? "" : "s") + " before registration), if NHT approves."]);
+    if (back) items.push(["", label(start), "Backdated start you've asked about (" + back + " month" + (back === 1 ? "" : "s") + " before registration). Only if NHT approves, and not counted toward eligibility here."]);
     items.push(["", label(reg), "NHT registers you. First payment due now" + (back ? ", plus the backdated lump sum" : "") + "."]);
-    items.push(["", label(weeksDate), prior ? "12 months of on-time payments reached since your start date." : "104 weeks (2 years) of contributions reached from your start date."]);
-    if (waitDate > weeksDate) items.push(["", label(waitDate), "Waiting time from registration ends (" + (prior ? "1 year" : "2 years") + ")."]);
+    if (prior) items.push(["", "Your record", priorWeeks ? priorWeeks + " earlier weeks entered, so you need about " + weeksNeeded + " more weeks of contributions (at least 52, all on time)." : "Enter your earlier weeks from NHT Online for a better estimate. Until then this assumes you need the full 104 weeks."]);
     if (state.travel === "no") items.push(["", label(earliest - 3), "Have your recorded Power of Attorney done by now."]);
-    items.push(["gold", label(earliest), "Earliest month to request your eligibility letter and apply, if every month in the 52 weeks before is paid."]);
+    items.push(["gold", label(earliest), "Estimated month to ask NHT to review your eligibility, if every payment in the 52 weeks before is made on time. NHT confirms the actual date."]);
     if (paid !== null) {
       var gap = earliest - 1 - paid;
-      items.push([gap > 0 ? "" : "gold", "Paid up to " + label(paid), gap > 0 ? "You still need " + gap + " more monthly payment" + (gap === 1 ? "" : "s") + " before " + label(earliest) + "." : "You're paid up through the month before your earliest application date."]);
+      items.push([gap > 0 ? "" : "gold", "Paid up to " + label(paid), gap > 0 ? "You still need " + gap + " more monthly payment" + (gap === 1 ? "" : "s") + " before " + label(earliest) + "." : "You're paid up through the month before your estimated review date."]);
     }
     document.getElementById("timeline").innerHTML = items.map(function (it) { return '<div class="tl ' + it[0] + '"><b>' + it[1] + '</b><p>' + it[2] + '</p></div>'; }).join("");
   }
@@ -1585,7 +1886,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
   document.getElementById("loanType").addEventListener("change", function (e) { e.target.dataset.user = "1"; loan(); });
   document.getElementById("loanRate").addEventListener("input", function (e) { e.target.dataset.user = "1"; loan(); });
   ["applicants", "loanAmt", "term"].forEach(function (id) { document.getElementById(id).addEventListener("input", loan); });
-  ["regMonth", "startMonth", "paidThrough"].forEach(function (id) { document.getElementById(id).addEventListener("input", timeline); });
+  ["regMonth", "startMonth", "paidThrough", "priorWeeks"].forEach(function (id) { document.getElementById(id).addEventListener("input", timeline); });
   document.getElementById("regMonth").addEventListener("change", function (e) {
     var s = document.getElementById("startMonth");
     if (!s.value || s.value > e.target.value) s.value = e.target.value;
@@ -1597,14 +1898,14 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
     var b = e.target.closest(".pcard"); if (!b) return;
     state.mode = b.getAttribute("data-mode"); save(); render();
   });
-  ["sPrice", "sComm", "sAtty", "sMort", "sOther", "sRate", "sHalf"].forEach(function (id) { document.getElementById(id).addEventListener("input", sellCalc); document.getElementById(id).addEventListener("change", sellCalc); });
-  ["srCat", "srParish"].forEach(function (id) { document.getElementById(id).addEventListener("change", searchLink); });
+  ["sPrice", "sComm", "sAtty", "sMort", "sDisch", "sMV", "sOther", "sRate", "sHalf", "sAgr"].forEach(function (id) { document.getElementById(id).addEventListener("input", sellCalc); document.getElementById(id).addEventListener("change", sellCalc); });
   document.getElementById("pathCards").addEventListener("click", function (e) {
     var b = e.target.closest(".pcard"); if (!b) return;
     state.path = b.getAttribute("data-path"); save(); render();
     document.getElementById("pathTitle").scrollIntoView({ behavior: "smooth", block: "start" });
   });
-  ["cDep", "cAtty", "cVal", "cFee"].forEach(function (id) { document.getElementById(id).addEventListener("input", costs); });
+  ["cDep", "cCashDep", "cAtty", "cVal", "cFee"].forEach(function (id) { document.getElementById(id).addEventListener("input", costs); });
+  document.getElementById("cAgr").addEventListener("change", function () { costs(); readiness(); });
   document.getElementById("cPrice").addEventListener("input", function (e) { document.getElementById("price").value = e.target.value; gap(); costs(); });
   document.getElementById("price").addEventListener("input", function (e) { document.getElementById("cPrice").value = e.target.value; costs(); });
   document.getElementById("cDep").addEventListener("input", function (e) { document.getElementById("cash").value = Math.round(num("cPrice") * num("cDep") / 100); gap(); });
@@ -1625,7 +1926,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       lines.push("   Contact: " + st.contacts.map(function (c) { return c.name + " (" + c.lines.join("; ") + ")"; }).join(" | "));
       lines.push("");
     });
-    if (state.mode !== "sell" && state.path === "nht") lines.push("Earliest loan application: " + document.getElementById("earliest").textContent);
+    if (state.mode !== "sell" && state.path === "nht") lines.push("Estimated NHT eligibility review: " + document.getElementById("earliest").textContent + " (NHT confirms)");
     lines.push((state.mode === "sell" ? "Listing agent: " : "Agent for the buying process: ") + "Odeen Cunningham, 876-305-5553, ocunningham@realtyonegrouptitans.com");
     var text = lines.join("\n");
     try { navigator.clipboard.writeText(text).then(function () { toast("Checklist copied"); }, function () { toast("Your browser blocked copying"); }); }
