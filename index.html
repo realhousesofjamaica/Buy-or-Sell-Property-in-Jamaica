@@ -39,7 +39,24 @@ h2 { font-size: 1.3rem; font-weight: 700; }
 h3 { font-size: 1.08rem; font-weight: 700; }
 h4 { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.05em; text-transform: uppercase; color: var(--accent); }
 p { margin: 0; }
-.wrap { max-width: 1160px; margin: 0 auto; padding: 32px 20px 56px; display: grid; gap: 28px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding: 32px 20px 56px; display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+.wrap > *, .main > *, .tools > *, .wide > *, .panel > *, .path-cards > *, .figs > *, .row2 > *, .row3 > * { min-width: 0; }
+body { overflow-x: hidden; overflow-wrap: break-word; }
+a[href^="mailto"], .agent-mini p { overflow-wrap: anywhere; }
+.step-body, .step-top > div, .contact-grid > *, .dir > *, .lenders > * { min-width: 0; }
+.contact span, .contact strong { overflow-wrap: anywhere; }
+.cost-table td:first-child { white-space: normal; }
+.cost-table td:last-child { white-space: nowrap; text-align: right; }
+@media (max-width: 600px) { .cost-table { font-size: 0.86rem; } .panel .cost-table td:last-child { white-space: normal; } .step { padding: 14px; gap: 10px; } }
+.path-cards.mode-cards { grid-template-columns: repeat(2, 1fr); }
+.figs.f3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 600px) {
+  .wrap { padding: 20px 16px 40px; gap: 22px; }
+  .path-cards.mode-cards { grid-template-columns: 1fr; }
+  .agent-mini { flex-wrap: wrap; }
+  .agent-mini p { flex: 1 1 200px; }
+  .figs.f3 { grid-template-columns: 1fr; }
+}
 
 header { display: grid; gap: 12px; max-width: 780px; }
 header > p { color: var(--muted); }
@@ -171,7 +188,7 @@ ol.steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
 .step ul { margin: 0; padding-left: 20px; display: grid; gap: 4px; }
 .when { font-size: 0.8rem; font-weight: 700; color: var(--gold); text-transform: uppercase; letter-spacing: 0.04em; }
 .contact { border: 1px solid var(--line); border-left: 3px solid var(--accent); border-radius: 8px; padding: 10px 14px; background: var(--bg); display: grid; gap: 8px; font-size: 0.93rem; }
-.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 10px 18px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(210px, 100%), 1fr)); gap: 10px 18px; }
 .contact-grid div { display: grid; gap: 1px; }
 .contact-grid strong { font-size: 0.92rem; }
 .contact-grid span { color: var(--muted); font-variant-numeric: tabular-nums; }
@@ -206,12 +223,12 @@ tr.hl td { background: var(--accent-soft); font-weight: 600; }
 .tl b { font-variant-numeric: tabular-nums; }
 .tl p { color: var(--muted); font-size: 0.92rem; }
 
-.dir { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; }
+.dir { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(240px, 100%), 1fr)); gap: 12px; }
 .dir div { background: var(--surface); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-size: 0.92rem; display: grid; gap: 2px; }
 .dir span { color: var(--muted); font-variant-numeric: tabular-nums; }
 footer { display: grid; gap: 14px; font-size: 0.92rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 22px; }
 footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
-.lenders { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 12px; }
+.lenders { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr)); gap: 12px; }
 .lcard { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; display: grid; gap: 6px; align-content: start; font-size: 0.93rem; }
 .lcard .tags { display: flex; flex-wrap: wrap; gap: 4px; }
 .lcard .tags span { font-size: 0.74rem; font-weight: 700; padding: 2px 8px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); }
@@ -263,7 +280,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       </div>
     </div>
     <span class="qt" style="margin-top:6px; font-weight:600; font-size:0.97rem;">Are you buying or selling?</span>
-    <div class="path-cards" id="modeCards" style="grid-template-columns: repeat(2, 1fr);">
+    <div class="path-cards mode-cards" id="modeCards">
       <button type="button" class="pcard" data-mode="buy" aria-pressed="false">
         <span class="pc-tag">Buy</span>
         <b>I want to buy</b>
@@ -557,7 +574,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
           <input id="priorWeeks" type="number" min="0" step="1" value="0">
         </div>
       </div>
-      <div class="figs" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="figs f3">
         <div class="fig"><small>Backdated months</small><b id="backMonths">–</b></div>
         <div class="fig"><small>Lump sum for backdated months</small><b id="backSum">–</b></div>
         <div class="fig"><small>Estimated review date (if NHT verifies your record)</small><b id="earliest">–</b></div>
@@ -580,7 +597,7 @@ footer ul { margin: 0; padding-left: 18px; display: grid; gap: 4px; }
       <div class="field"><label for="aTerm">Years to repay</label><input id="aTerm" type="number" min="5" max="40" step="1" value="30"></div>
       <div class="field"><label for="aDep">Deposit you have (% of price)</label><input id="aDep" type="number" min="0" max="90" step="1" value="10"></div>
     </div>
-    <div class="figs" style="grid-template-columns: repeat(3, 1fr);">
+    <div class="figs f3">
       <div class="fig"><small>Monthly payment you can carry</small><b id="aPay">–</b></div>
       <div class="fig"><small>Loan you could get</small><b id="aLoan">–</b></div>
       <div class="fig"><small>Price range to look at</small><b id="aPrice">–</b></div>
